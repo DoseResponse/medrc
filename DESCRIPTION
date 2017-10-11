@@ -1,0 +1,14 @@
+Package: medrc
+Type: Package
+Title: Mixed effect dose-response curves
+Version: 0.0-75
+Date: 2016-09-07
+Author: Daniel Gerhard, Christian Ritz
+Maintainer: Daniel Gerhard <00gerhard@gmail.com>
+Description: Uses a combination of package drc and nlme to fit nonlinear mixed effects models with ED estimation for the fixed effects.
+Depends: drc, nlme, ggplot2
+Imports: statmod, plyr, gtools, multcomp
+VignetteBuilder: knitr
+Suggests: knitr, mratios
+License: GPL
+LazyLoad: yes
