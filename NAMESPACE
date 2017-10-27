@@ -1,4 +1,4 @@
-import(nlme, drc, ggplot2)
+import(nlme, drc, ggplot2, drcData)
 importFrom("statmod", gauss.quad.prob)
 importFrom("plyr", ldply)
 importFrom("gtools", combinations)
