@@ -67,8 +67,8 @@ meLL.2 <- function(x, b, e){
   .actualArgs <- c("b", "e")
   t2 <- exp(b*(log(x) - log(e)))
   t5 <- (1 + t2)
-  .grad <- cbind(-1 * drc:::xlogx(x/e, b, 2), 
-                 drc:::divAtInf(t2, (1 + t2)^2) * b/e)
+  .grad <- cbind(-1 * xlogx(x/e, b, 2), 
+                 divAtInf(t2, (1 + t2)^2) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -79,9 +79,9 @@ meLL.3 <- function(x, b, d, e){
   .actualArgs <- c("b", "d", "e")
   t2 <- exp(b*(log(x) - log(e)))
   t5 <- (1 + t2)
-  .grad <- cbind(-d * drc:::xlogx(x/e, b, 2), 
+  .grad <- cbind(-d * xlogx(x/e, b, 2), 
                  1/t5,
-                 d * drc:::divAtInf(t2, (1 + t2)^2) * b/e)
+                 d * divAtInf(t2, (1 + t2)^2) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -93,10 +93,10 @@ meLL.4 <- function(x, b, c, d, e){
   t1 <- d - c
   t2 <- exp(b*(log(x) - log(e)))
   t5 <- (1 + t2)
-  .grad <- cbind(-t1 * drc:::xlogx(x/e, b, 2), 
+  .grad <- cbind(-t1 * xlogx(x/e, b, 2), 
                  1-1/t5, 
                  1/t5,
-                 t1 * drc:::divAtInf(t2, (1 + t2)^2) * b/e)
+                 t1 * divAtInf(t2, (1 + t2)^2) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -108,11 +108,11 @@ meLL.5 <- function(x, b, c, d, e, f){
   t1 <- d - c
   t2 <- exp(b*(log(x) - log(e)))
   t5 <- (1 + t2)^f
-  .grad <- cbind(-t1 * drc:::xlogx(x/e, b, f+1) * f, 
+  .grad <- cbind(-t1 * xlogx(x/e, b, f+1) * f, 
                  1-1/t5, 
                  1/t5,
-                 t1 * f * drc:::divAtInf(t2, (1 + t2)^(f+1)) * b/e,
-                 -t1 * drc:::divAtInf(log(1 + t2), t5))
+                 t1 * f * divAtInf(t2, (1 + t2)^(f+1)) * b/e,
+                 -t1 * divAtInf(log(1 + t2), t5))
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -124,8 +124,8 @@ meW1.2 <- function(x, b, e){
   .value <- exp(-exp(b * (log(x) - log(e))))
   .actualArgs <- c("b", "e")
   t2 <- exp(b * (log(x) - log(e)))
-  .grad <- cbind(-1 * drc:::divAtInf(drc:::xlogx(x/e, b), exp(t2)), 
-                 drc:::divAtInf(t2, exp(t2)) * b/e)
+  .grad <- cbind(-1 * divAtInf(xlogx(x/e, b), exp(t2)), 
+                 divAtInf(t2, exp(t2)) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -136,9 +136,9 @@ meW1.3 <- function(x, b, d, e){
   .actualArgs <- c("b", "d", "e")
   t2 <- exp(b * (log(x) - log(e)))
   t3 <- exp(-t2)
-  .grad <- cbind(-d * drc:::divAtInf(drc:::xlogx(x/e, b), exp(t2)), 
+  .grad <- cbind(-d * divAtInf(xlogx(x/e, b), exp(t2)), 
                  t3, 
-                 d * drc:::divAtInf(t2, exp(t2)) * b/e)
+                 d * divAtInf(t2, exp(t2)) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -150,10 +150,10 @@ meW1.4 <- function(x, b, c, d, e){
   t1 <- d - c
   t2 <- exp(b * (log(x) - log(e)))
   t3 <- exp(-t2)
-  .grad <- cbind(-t1 * drc:::divAtInf(drc:::xlogx(x/e, b), exp(t2)), 
+  .grad <- cbind(-t1 * divAtInf(xlogx(x/e, b), exp(t2)), 
                  1 - t3, 
                  t3, 
-                 t1 * drc:::divAtInf(t2, exp(t2)) * b/e)
+                 t1 * divAtInf(t2, exp(t2)) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -164,8 +164,8 @@ meW2.2 <- function(x, b, e){
   .actualArgs <- c("b", "e")
   t2 <- exp(b * (log(x) - log(e)))
   t3 <- exp(-t2)
-  .grad <- cbind(drc:::xexplogx(x/e, b), 
-                 -1 * drc:::xexpx(x/e, b) * b/e)
+  .grad <- cbind(xexplogx(x/e, b), 
+                 -1 * xexpx(x/e, b) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -176,9 +176,9 @@ meW2.3 <- function(x, b, d, e){
   .actualArgs <- c("b", "d", "e")
   t2 <- exp(b * (log(x) - log(e)))
   t3 <- exp(-t2)
-  .grad <- cbind(d * drc:::xexplogx(x/e, b), 
+  .grad <- cbind(d * xexplogx(x/e, b), 
                  1 - t3, 
-                 -d * drc:::xexpx(x/e, b) * b/e)
+                 -d * xexpx(x/e, b) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -190,10 +190,10 @@ meW2.4 <- function(x, b, c, d, e){
   t1 <- d - c
   t2 <- exp(b * (log(x) - log(e)))
   t3 <- exp(-t2)
-  .grad <- cbind(t1 * drc:::xexplogx(x/e, b), 
+  .grad <- cbind(t1 * xexplogx(x/e, b), 
                  1 - (1 - t3), 
                  1 - t3, 
-                 -t1 * drc:::xexpx(x/e, b) * b/e)
+                 -t1 * xexpx(x/e, b) * b/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -276,7 +276,7 @@ meAR.2 <- function(x, d, e){
   t2 <- exp(log(x) - log(e))
   t3 <- exp(-t2)
   .grad <- cbind(1 - t3, 
-                 -d * drc:::xexpx(x/e, 1)/e)
+                 -d * xexpx(x/e, 1)/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -290,7 +290,7 @@ meAR.3 <- function(x, c, d, e){
   t3 <- exp(-t2)
   .grad <- cbind(1 - (1 - t3), 
                  1 - t3, 
-                 -t1 * drc:::xexpx(x/e, 1)/e)
+                 -t1 * xexpx(x/e, 1)/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -304,7 +304,7 @@ meEXD.2 <- function(x, d, e){
   t2 <- exp(log(x) - log(e))
   t3 <- exp(-t2)
   .grad <- cbind(t3, 
-                 d * drc:::divAtInf(t2, exp(t2))/e)
+                 d * divAtInf(t2, exp(t2))/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)
@@ -318,7 +318,7 @@ meEXD.3 <- function(x, c, d, e){
   t3 <- exp(-t2)
   .grad <- cbind(1 - t3, 
                  t3, 
-                 t1 * drc:::divAtInf(t2, exp(t2))/e)
+                 t1 * divAtInf(t2, exp(t2))/e)
   dimnames(.grad) <- list(NULL, .actualArgs)
   attr(.value, "gradient") <- .grad
   return(.value)

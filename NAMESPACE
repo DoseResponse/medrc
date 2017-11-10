@@ -1,4 +1,4 @@
-import(nlme, drc, ggplot2)
+import(nlme, drc, drcData, ggplot2, metafor)
 importFrom("statmod", gauss.quad.prob)
 importFrom("plyr", ldply)
 importFrom("gtools", combinations)
@@ -6,9 +6,16 @@ importFrom("stats", AIC, BIC, pnorm, dnorm)
 importFrom("multcomp", parm)
 importFrom("stats", "as.formula", "coef", "coefficients", "logLik",
              "model.frame", "na.omit", "nobs", "numericDeriv", "predict",
-             "qnorm", "resid", "sortedXyData", "vcov")
-  importFrom("utils", "stack")
-export(medrm, glsdrm, mmaED, mmaBMD, LL4.loged, LN4.loged, W14.loged, W24.loged, EDmarg, BMD, BMDmarg, BMDadjresp, mmplot,
+             "qnorm", "resid", "sortedXyData", "vcov", "ARMAacf", "cov2cor", "formula", "get_all_vars",
+             "lm", "model.extract", "model.matrix", "model.response",
+             "na.pass", "pchisq", "pf", "pt", "qt", "sigma", "toeplitz",
+             "var")
+importFrom("Matrix", Matrix, bdiag, symmpart, sparse.model.matrix, nearPD)
+importFrom("utils", "stack")
+export(medrm, glsdrm, metadrm, 
+       mmaED, mmaBMD, 
+       LL4.loged, LN4.loged, W14.loged, W24.loged, 
+       EDmarg, BMD, BMDmarg, BMDadjresp, mmplot,
        meL.2, meL.3, meL.4, meL.5, 
        meLL.2, meLL.3, meLL.4, meLL.5, 
        meW1.2, meW1.3, meW1.4, 
@@ -42,3 +49,5 @@ S3method(AIC, glsdrc)
 S3method(BIC, glsdrc)
 S3method(logLik, glsdrc)
 
+S3method(vcov, metadrc)
+S3method(df.residual, metadrc)

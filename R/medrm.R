@@ -101,7 +101,7 @@ function(form, curveid=NULL, data, fct, random, correlation=NULL, weights=NULL, 
   
   # starting values for fixed effects (drc fct selfstart slot)
   if (is.null(start)){       
-    ini <- medrc:::findfixedstartvals(form, data, as.character(curveid)[3], fct, fid=!fct$names %in% cin, mform)
+    ini <- findfixedstartvals(form, data, as.character(curveid)[3], fct, fid=!fct$names %in% cin, mform)
 #     if (randomstart == TRUE){
 #       rini <- findrandomstartvals(form, data, fct, random)
 #       ini <- list(fixed=ini, random=rini)

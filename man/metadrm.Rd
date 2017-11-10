@@ -1,0 +1,62 @@
+\name{metadrm}
+
+\alias{metadrm}
+
+\title{Fitting hierarchical dose-response models via meta-analysis}
+
+\description{
+  A two-stage meta-analysis approach to fit hierarchical dose-response models.
+}
+
+\usage{
+  metadrm(formula, fct, ind, data, type="continuous", 
+  curveid2=NULL, pmodels2=NULL, struct="UN", method="REML", ...)
+}
+
+\arguments{
+  \item{formula}{a symbolic description of the model to be fit. Either of the form 'response \eqn{~} dose' 
+  or as a data frame with response values in first column and dose values in second column.}
+  
+  \item{fct}{a list with three or more elements specifying the non-linear
+  function, the accompanying self starter function, the names of the parameter in the non-linear function and, 
+  optionally, the first and second derivatives as well as information used for calculation of ED values.
+  Currently available functions include, among others, the four- and five-parameter log-logistic models 
+  \code{\link{LL.4}}, \code{\link{LL.5}} and the Weibull model \code{\link{W1.4}}. Use
+  \code{\link{getMeanFunctions}} for a full list.}
+  
+  \item{ind}{a factor identifying individual curves.}
+  
+  \item{data}{an optional data frame containing the variables in the model.}
+  
+    \item{type}{a character string specifying the distribution of the data (parameter estimation will depend on the assumed distribution as different log likelihood functions will be used). 
+  The default is "continuous", corresponding to assuming a normal distribution. The choices "binary" and "event" imply a binomial and multinomial distribution, respectively. The choice "ssd" is for fitting a species sensitivity
+  distribution.}
+  
+  \item{curveid2}{a numeric vector or factor containing the between-curve grouping of the data.}
+  
+  \item{pmodels2}{a list containing a formula for each parameter in the nonlinear function.}
+
+  \item{struct}{correlation structure between population coefficients, either "CS" for compound symmetry, "HCS" for heteroscedastic compound symmetry, "UN" for an unstructured variance-covariance matrix, "ID" for a scaled identity matrix, "DIAG" for a diagonal matrix, "AR" for an AR(1) autoregressive structure, or "HAR" for a heteroscedastic AR(1) autoregressive structure.}
+  
+  \item{method}{character string specifying whether the meta-analysis model should be fitted via maximum-likelihood ("ML") or via restricted maximum-likelihood ("REML") estimation. Default is "REML".}
+  
+  \item{...}{further arguments supplied to function drm.}
+}
+
+\details{
+  This function estimates population parameters from individual drm fits, using the metafor package.  
+}
+
+\value{
+  An object of class 'metadrc'. 
+}
+
+%\references{ ~put references to the literature/web site here ~ }
+
+\author{Daniel Gerhard}
+
+
+%\examples{}
+
+\keyword{models}
+\keyword{nonlinear}

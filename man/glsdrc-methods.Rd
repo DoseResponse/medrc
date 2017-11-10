@@ -9,8 +9,8 @@
 \alias{logLik.glsdrc}
 \alias{print.glsdrc}
 
-\title{gdrc methods}
-\description{Methods for objects of class gdrc}
+\title{glsdrc methods}
+\description{Methods for objects of class glsdrc}
 \usage{
 \method{df.residual}{glsdrc}(object, ...)
 \method{predict}{glsdrc}(object, ..., newdata = NULL)
