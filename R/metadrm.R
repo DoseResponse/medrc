@@ -61,7 +61,13 @@ metadrm <- function(formula, fct, ind, data, type="continuous", cid2=NULL, pms2=
     }
   }
   
-  res <- eval(parse(text="rmadrc(estimate, V=variance, mods = modsform, random = ~ 0 + coefficient | ind, struct=struct, data=est, intercept=FALSE, method=method)"))
+  if (type == "continuous"){
+    testarg <- "'t'" 
+  } else {
+    testarg <- "'z'"
+  }
+      
+  res <- eval(parse(text=paste("rmadrc(estimate, V=variance, mods = modsform, random = ~ 0 + coefficient | ind, struct=struct, data=est, intercept=FALSE, method=method, test=", testarg,")", sep="")))
   
   rmacoef <- as.vector(res$beta)
   names(rmacoef) <- rownames(res$beta)
