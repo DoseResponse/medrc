@@ -10,7 +10,7 @@
 
 \usage{
   metadrm(formula, fct, ind, data, type="continuous", 
-  curveid2=NULL, pmodels2=NULL, struct="UN", method="REML", ...)
+  cid2=NULL, pms2=NULL, struct="UN", method="REML", ...)
 }
 
 \arguments{
@@ -32,9 +32,9 @@
   The default is "continuous", corresponding to assuming a normal distribution. The choices "binary" and "event" imply a binomial and multinomial distribution, respectively. The choice "ssd" is for fitting a species sensitivity
   distribution.}
   
-  \item{curveid2}{a numeric vector or factor containing the between-curve grouping of the data.}
+  \item{cid2}{a numeric vector or factor containing the between-curve grouping of the data.}
   
-  \item{pmodels2}{a list containing a formula for each parameter in the nonlinear function.}
+  \item{pms2}{a list containing a formula for each parameter in the nonlinear function.}
 
   \item{struct}{correlation structure between population coefficients, either "CS" for compound symmetry, "HCS" for heteroscedastic compound symmetry, "UN" for an unstructured variance-covariance matrix, "ID" for a scaled identity matrix, "DIAG" for a diagonal matrix, "AR" for an AR(1) autoregressive structure, or "HAR" for a heteroscedastic AR(1) autoregressive structure.}
   

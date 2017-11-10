@@ -1,18 +1,18 @@
-metadrm <- function(formula, fct, ind, data, type="continuous", curveid2=NULL, pmodels2=NULL, struct="UN", method="REML", ...){
+metadrm <- function(formula, fct, ind, data, type="continuous", cid2=NULL, pms2=NULL, struct="UN", method="REML", ...){
   mf <- mfr <- call <- match.call(expand.dots = TRUE)
   nmf <- names(mf)
   mnmf <- c(1, match(c("formula", "curveid", "pmodels", "data", "fct", "subset", "na.action", "weights", "type", "bcVal", "bcAdd", "start", "robust", "logDose", "control", "lowerl", "upperl", "separate", "pshifts"), nmf, 0))
   mf <- mf[mnmf]
   mf[1] <- quote(drm())
   
-  m <- match(c("formula", "data", "curveid", "ind", "curveid2", "subset", "na.action", "weights"), names(mfr), 0L)
+  m <- match(c("formula", "data", "curveid", "ind", "cid2", "subset", "na.action", "weights"), names(mfr), 0L)
   mfr <- mfr[c(1L, m)]
   mfr$drop.unused.levels <- FALSE
   mfr[[1L]] <- quote(model.frame)
   mfr <- eval(mfr, parent.frame())
   id <- model.extract(mfr, "ind")
   cid <- model.extract(mfr, "curveid")
-  gid <- model.extract(mfr, "curveid2")
+  gid <- model.extract(mfr, "cid2")
   
   if (!is.null(id)) id <-  droplevels(as.factor(id))
   if (!is.null(cid)) cid <-  droplevels(as.factor(cid))
@@ -37,19 +37,19 @@ metadrm <- function(formula, fct, ind, data, type="continuous", curveid2=NULL, p
   if (is.null(gid)){
     modsform <- ~ 0 + coefficient
   } else {
-    grpname <- as.character(as.list(call)$curveid2)
+    grpname <- as.character(as.list(call)$cid2)
     gdat <- data.frame(id, gid)
     grplev <- unlist(lapply(split(gdat, id), function(spd){
       unique(spd[,"gid"])
     }))
     est[,grpname] <- as.factor(rep(grplev, times=npar))
     
-    if (is.null(pmodels2)){
+    if (is.null(pms2)){
       modsform <- as.formula(paste("~ 0 + ", grpname, ":coefficient", sep=""))
     } else {
       Xc <- model.matrix(~ 0 + coefficient, data=est)
       Xlist <- lapply(1:ncol(Xc), function(i){
-        Xp <- Xc[,i] * model.matrix(pmodels2[[i]], data=est)
+        Xp <- Xc[,i] * model.matrix(pms2[[i]], data=est)
         colnames(Xp) <- paste(fct$names[i], ":", colnames(Xp), sep="")
         return(Xp)
       })
@@ -89,7 +89,7 @@ metadrm <- function(formula, fct, ind, data, type="continuous", curveid2=NULL, p
     out$indexMat <- mod$indexMat
   } else {
     pmodels <- as.list(call)$pmodels
-    if (is.null(pmodels) & is.null(pmodels2)){
+    if (is.null(pmodels) & is.null(pms2)){
       if (is.null(gid)){
         nc <- length(levels(cid))
         cnam <- levels(cid)
