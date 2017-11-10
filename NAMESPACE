@@ -51,3 +51,5 @@ S3method(logLik, glsdrc)
 
 S3method(vcov, metadrc)
 S3method(df.residual, metadrc)
+S3method(coef, metadrc)
+S3method(print, metadrc)
