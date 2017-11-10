@@ -1,14 +1,22 @@
-import(nlme, drc, ggplot2, drcData)
+import(nlme, drc, ggplot2)
 importFrom("statmod", gauss.quad.prob)
 importFrom("plyr", ldply)
 importFrom("gtools", combinations)
-importFrom("stats", AIC, BIC)
+importFrom("stats", AIC, BIC, pnorm, dnorm)
 importFrom("multcomp", parm)
 importFrom("stats", "as.formula", "coef", "coefficients", "logLik",
              "model.frame", "na.omit", "nobs", "numericDeriv", "predict",
              "qnorm", "resid", "sortedXyData", "vcov")
   importFrom("utils", "stack")
-export(medrm, glsdrm, mmaED, mmaBMD, LL4.loged, LN4.loged, W14.loged, W24.loged, EDmarg, BMD, BMDmarg, BMDadjresp, mmplot)
+export(medrm, glsdrm, mmaED, mmaBMD, LL4.loged, LN4.loged, W14.loged, W24.loged, EDmarg, BMD, BMDmarg, BMDadjresp, mmplot,
+       meL.2, meL.3, meL.4, meL.5, 
+       meLL.2, meLL.3, meLL.4, meLL.5, 
+       meW1.2, meW1.3, meW1.4, 
+       meW2.2, meW2.3, meW2.4, 
+       meLN.2, meLN.3, meLN.4,
+       meLLN.4,
+       meAR.2, meAR.3,
+       meEXD.2, meEXD.3)
 
 S3method(print, medrc)
 S3method(df.residual, medrc)

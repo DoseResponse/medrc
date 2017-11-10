@@ -17,14 +17,11 @@ print.medrc <- function (x, ..., digits = max(3, getOption("digits") - 3)){
 
 
 residuals.medrc <- function(object, ...){
-  fct <- object$fct
-  makehelpfunction(fct)
   resid(object$fit, type="n")
 }
 
 predict.medrc <- function(object, ..., newdata=NULL, level=NULL, type=c("conditional", "marginal"), nGQ=5){
   fct <- object$fct
-  makehelpfunction(fct)  
   if (is.null(newdata)) newdata <- object$data
   if (is.null(level)) level <- object$fit$dims$Q
   if (type[1] == "conditional"){

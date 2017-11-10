@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+medrc.Rproj
+.Rbuildignore

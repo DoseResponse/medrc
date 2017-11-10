@@ -43,16 +43,16 @@ ggplot(DNase, aes(y=density, x=conc, colour=Run)) + geom_point() + coord_trans(x
 
 #############
 # fit a 5-parameter log-logistic model for each Run
-mc <- glsdrm(density ~ conc, curveid=b + c + d + e + f ~ Run, 
-             fct=LL.5(), data=DNase)
-plot(mc, logx=TRUE, ndose=100)
-print(mc)
+#mc <- glsdrm(density ~ conc, curveid=b + c + d + e + f ~ Run, 
+#             fct=LL.5(), data=DNase)
+#plot(mc, logx=TRUE, ndose=100)
+#print(mc)
 
 # only curve specific inflection points
-mcd <- glsdrm(density ~ conc, curveid=e ~ Run, 
-              fct=LL.5(), data=DNase)
-plot(mcd, logx=TRUE, ndose=100)
-print(mcd)
+#mcd <- glsdrm(density ~ conc, curveid=e ~ Run, 
+#              fct=LL.5(), data=DNase)
+#plot(mcd, logx=TRUE, ndose=100)
+#print(mcd)
 
 # a 4-parameter log-Normal model
 mcln <- glsdrm(density ~ conc, curveid=b + c + d + e ~ Run, 
@@ -60,22 +60,22 @@ mcln <- glsdrm(density ~ conc, curveid=b + c + d + e ~ Run,
 plot(mcln, logx=TRUE, ndose=100)
 
 # AIC comparison
-AIC(mc, mcd, mcln)
+#AIC(mc, mcd, mcln)
 
 
 # ED25, ED50, ED75 estimation for LL.5 model
-ED(mc, c(25, 50, 75), interval="tfls")
+#ED(mc, c(25, 50, 75), interval="tfls")
 
 # pairwise comparison of ED50 between Runs
-EDcomp(mc, c(50, 50))
+#EDcomp(mc, c(50, 50))
 
 # compound-symmetry correlation structure within Runs
-mccs <- glsdrm(density ~ conc, fct=LL.5(), data=DNase, 
-               correlation=corCompSymm(0.5, form=~1|Run))
-summary(mccs)
+#mccs <- glsdrm(density ~ conc, fct=LL.5(), data=DNase, 
+#               correlation=corCompSymm(0.5, form=~1|Run))
+#summary(mccs)
 
 # ED50 estimation
-ED(mccs, c(25, 50, 75), interval="tfls")
+#ED(mccs, c(25, 50, 75), interval="tfls")
 }
 
 

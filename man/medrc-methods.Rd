@@ -15,7 +15,10 @@
 \description{Methods for objects of class medrc}
 \usage{
 \method{df.residual}{medrc}(object, ...)
-\method{predict}{medrc}(object, ..., newdata = NULL, level = NULL, type=c("conditional", "marginal"), nGQ=5)
+\method{predict}{medrc}(object, ..., newdata = NULL, 
+                        level = NULL, 
+                        type=c("conditional", "marginal"), 
+                        nGQ=5)
 \method{residuals}{medrc}(object, ...)
 \method{vcov}{medrc}(object, ...)
 \method{summary}{medrc}(object, ...)

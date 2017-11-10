@@ -45,7 +45,7 @@ DNase$Run <- factor(DNase$Run, levels=1:11)
 
 ggplot(DNase, aes(y=density, x=conc, colour=Run)) + geom_point() + coord_trans(x="log")
 
-
+\dontrun{
 #############
 # fit a 5-parameter log-logistic model
 # with random asymptotes, steepness and inflection point location
@@ -128,6 +128,7 @@ plot(mmw, logx=TRUE, ndose=100, ranef=TRUE)
 
 # AIC comparison of LL.5 and W1.4 model
 AIC(mm, mmw)
+}
 }
 
 

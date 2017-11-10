@@ -16,13 +16,11 @@ print.glsdrc <- function (x, ..., digits = max(3, getOption("digits") - 3)){
 
 residuals.glsdrc <- function(object, ...){
   fct <- object$fct
-  makehelpfunction(fct)
   resid(object$fit, type="n")
 }
 
 predict.glsdrc <- function(object, ..., newdata=NULL){
   fct <- object$fct
-  makehelpfunction(fct)
   if (is.null(newdata)) newdata <- object$data
   predict(object$fit, newdata=newdata)
 }

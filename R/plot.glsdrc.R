@@ -1,6 +1,5 @@
 plot.glsdrc <- function(x, ..., ndose=25, logx=FALSE){
   fct <- x$fct
-  makehelpfunction(fct)
   
   yname <- as.character(x$form)[2]
   xname <- as.character(x$form)[3]

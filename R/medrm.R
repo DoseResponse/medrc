@@ -1,10 +1,81 @@
 medrm <-
 function(form, curveid=NULL, data, fct, random, correlation=NULL, weights=NULL, control=NULL, start=NULL, REML=FALSE){
   callDetail <- match.call()
-  # rewrite drc fct into nls selfstart function
-  # drcfunction() is defined in global environment...
-  makehelpfunction(fct)
+  fname <- fct$name
+  ffixed <- fct$fixed
 
+  mefct <- switch(fname, 
+                  L.2 = "meL.2",
+                  L.3 = "meL.3",
+                  L.4 = "meL.4",
+                  L.5 = "meL.5",
+                  LL.2 = "meLL.2",
+                  LL.3 = "meLL.3",
+                  LL.4 = "meLL.4",
+                  LL.5 = "meLL.5",
+                  W1.2 = "meW1.2",
+                  W1.3 = "meW1.3",
+                  W1.4 = "meW1.4",
+                  W2.2 = "meW2.2",
+                  W2.3 = "meW2.3",
+                  W2.4 = "meW2.4",
+                  LN.2 = "meLN.2",
+                  LN.3 = "meLN.3",
+                  LN.4 = "meLN.4",
+                  AR.3 = "meAR.3",
+                  AR.2 = "meAR.2",
+                  EXD.3 = "meEXD.3",
+                  EXD.2 = "meEXD.2")
+  
+  mepnames <- switch(fname, 
+                     L.2 = c("b", "e"),
+                     L.3 = c("b", "d", "e"),
+                     L.4 = c("b", "c", "d", "e"),
+                     L.5 = c("b", "c", "d", "e", "f"),
+                     LL.2 = c("b", "e"),
+                     LL.3 = c("b", "d", "e"),
+                     LL.4 = c("b", "c", "d", "e"),
+                     LL.5 = c("b", "c", "d", "e", "f"),
+                     W1.2 = c("b", "e"),
+                     W1.3 = c("b", "d", "e"),
+                     W1.4 = c("b", "c", "d", "e"),
+                     W2.2 = c("b", "e"),
+                     W2.3 = c("b", "d", "e"),
+                     W2.4 = c("b", "c", "d", "e"),
+                     LN.4 = c("b", "c", "d", "e"),
+                     LN.3 = c("b", "d", "e"),
+                     LN.2 = c("b", "e"),
+                     AR.3 = c("c", "d", "e"),
+                     AR.2 = c("d", "e"),
+                     EXD.3 = c("c", "d", "e"),
+                     EXD.2 = c("d", "e"))
+  
+  ppos <- switch(fname, 
+                 L.2 = c(1, 4),
+                 L.3 = c(1, 3, 4),
+                 L.4 = 1:4,
+                 L.5 = 1:5,
+                 LL.2 = c(1, 4),
+                 LL.3 = c(1, 3, 4),
+                 LL.4 = 1:4,
+                 LL.5 = 1:5,
+                 W1.2 = c(1, 4),
+                 W1.3 = c(1, 3, 4),
+                 W1.4 = 1:4,
+                 W2.2 = c(1, 4),
+                 W2.3 = c(1, 3, 4),
+                 W2.4 = 1:4,
+                 LN.4 = 1:4,
+                 LN.3 = c(1, 3, 4),
+                 LN.2 = c(1, 4),
+                 AR.3 = c(2, 3, 4),
+                 AR.2 = c(3, 4),
+                 EXD.3 = c(2, 3, 4),
+                 EXD.2 = c(3, 4))
+  
+  pest <- mepnames[is.na(ffixed[ppos])]
+  pfixed <- paste(mepnames[!is.na(ffixed[ppos])], "=", ffixed[!is.na(ffixed[ppos])], sep="")
+  
   # one-sided curveid formula
   if (!is.null(curveid) & length(curveid) < 3){
     levelnames <- levels(data[, as.character(curveid)[2]])
@@ -16,7 +87,7 @@ function(form, curveid=NULL, data, fct, random, correlation=NULL, weights=NULL, 
   }  
   
   # dose-response formula
-  mform <- deparse(as.formula(paste(as.character(form)[2], as.character(form)[1], "drcfunction(", as.character(form)[3], ", ", paste(fct$names, collapse=", "), ")", sep="")))  
+  mform <- deparse(as.formula(paste(as.character(form)[2], as.character(form)[1], mefct, "(", as.character(form)[3], ", ", paste(pest, collapse=", "), if (all(pfixed != "=")) paste(",", paste(pfixed, collapse=", ")), ")", sep="")))  
   
   # fixed effects formula
   # paste list for each curveid:parameter combination
@@ -30,7 +101,7 @@ function(form, curveid=NULL, data, fct, random, correlation=NULL, weights=NULL, 
   
   # starting values for fixed effects (drc fct selfstart slot)
   if (is.null(start)){       
-    ini <- findfixedstartvals(form, data, as.character(curveid)[3], fct, fid=!fct$names %in% cin, mform)
+    ini <- medrc:::findfixedstartvals(form, data, as.character(curveid)[3], fct, fid=!fct$names %in% cin, mform)
 #     if (randomstart == TRUE){
 #       rini <- findrandomstartvals(form, data, fct, random)
 #       ini <- list(fixed=ini, random=rini)

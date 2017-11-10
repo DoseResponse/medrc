@@ -3,9 +3,13 @@
 \title{Marginal BMD estimation for medrc models}
 \description{Estimates the marginal benchmark dose, conditional on the estimated variance components.}
 \usage{
-BMDmarg(object, respLev, interval = c("none", "delta", "fls", "tfls"), 
-    clevel=NULL, level = ifelse(!(interval == "none"), 0.95, NULL), bmd = c("additional", "extra"), 
-    background = 0.05, nGQ=5, rfinterval=c(0, 1000), display=TRUE, ...)
+BMDmarg(object, respLev, 
+        interval = c("none", "delta", "fls", "tfls"), 
+        clevel=NULL, 
+        level = ifelse(!(interval == "none"), 0.95, NULL), 
+        bmd = c("additional", "extra"), 
+        background = 0.05, nGQ=5, rfinterval=c(0, 1000), 
+        display=TRUE, ...)
 }
 \arguments{
   \item{object}{an medrc object}

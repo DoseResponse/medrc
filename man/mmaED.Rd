@@ -3,8 +3,11 @@
 \title{ED estimation for averaged medrc and glsdrc models}
 \description{Estimates ED for averaged fixed effects of several medrc or glsdrc objects}
 \usage{
-mmaED(object, ..., respLev, ic = c("AIC", "BIC"), interval = c("none", "buckland", "kang"), 
-     level = 0.95, marginal=FALSE, nGQ=5, rfinterval=c(0, 1000))
+mmaED(object, ..., respLev, 
+      ic = c("AIC", "BIC"), 
+      interval = c("none", "buckland", "kang"), 
+     level = 0.95, marginal=FALSE, nGQ=5, 
+     rfinterval=c(0, 1000))
 }
 \arguments{
   \item{object}{an medrc object}

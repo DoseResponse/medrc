@@ -5,7 +5,10 @@ findfixedstartvalsglsdrm <- function(form, data, cid, fct, fid, mform){
     #plist <- lapply(stv, function(x) x)
     #names(plist) <- fct$names
     #return(plist)
-    return(NULL)
+    mf <- model.frame(form, data)
+    fullp <- coefficients(drm(form, data=mf[,1:2], fct=fct))
+    return(fullp)
+    #return(NULL)
   } else {
     cform <- as.formula(paste(as.character(form)[2], as.character(form)[1], as.character(form)[3], "+", cid))
     mf <- model.frame(cform, data)

@@ -1,6 +1,5 @@
 plot.medrc <- function(x, ..., ndose=25, ranef=FALSE, level=NULL, logx=FALSE){
   fct <- x$fct
-  makehelpfunction(fct)
   
   yname <- as.character(x$form)[2]
   xname <- as.character(x$form)[3]

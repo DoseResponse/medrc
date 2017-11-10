@@ -34,7 +34,6 @@ mmplot <- function(x, ..., ndose=25, logx=FALSE){
    
   datlist <- lapply(lllist, function(x, ndose, logx, dr, mf){
     fct <- x$fct    
-    makehelpfunction(fct) 
     if (is.null(x$curveid)){
       predictions <- x$fct$fct(dr, rbind(fixef(x$fit)))
       pdat <- data.frame(predictions, dose=dr) 
