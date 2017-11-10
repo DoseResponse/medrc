@@ -110,6 +110,7 @@ metadrm <- function(formula, fct, ind, data, type="continuous", cid2=NULL, pms2=
       names(out$coefficients) <- out$parNames[[1]]
     }
   }
+  colnames(out$vcov) <- rownames(out$vcov) <- out$parNames[[1]]
   
   class(out) <- c("metadrc", "drc")
   return(out)
