@@ -107,6 +107,7 @@ metadrm <- function(formula, fct, ind, data, type="continuous", curveid2=NULL, p
       out$parmMat <- pmat
       out$indexMat <- matrix(1:length(rmacoef), ncol=nc, byrow=TRUE)
       out$parNames <- list(paste(rep(fct$names, each=nc), rep(cnam, times=length(fct$names)), sep=":"), rep(fct$names, each=nc), rep(cnam, times=length(fct$names)))
+      names(out$coefficients) <- out$parNames[[1]]
     }
   }
   
