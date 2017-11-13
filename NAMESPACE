@@ -9,7 +9,7 @@ importFrom("stats", "as.formula", "coef", "coefficients", "logLik",
              "qnorm", "resid", "sortedXyData", "vcov", "ARMAacf", "cov2cor", "formula", "get_all_vars",
              "lm", "model.extract", "model.matrix", "model.response",
              "na.pass", "pchisq", "pf", "pt", "qt", "sigma", "toeplitz",
-             "var")
+             "var", "printCoefmat")
 importFrom("Matrix", Matrix, bdiag, symmpart, sparse.model.matrix, nearPD)
 importFrom("utils", "stack")
 export(medrm, glsdrm, metadrm, 
@@ -53,3 +53,4 @@ S3method(vcov, metadrc)
 S3method(df.residual, metadrc)
 S3method(coef, metadrc)
 S3method(print, metadrc)
+S3method(summary, metadrc)

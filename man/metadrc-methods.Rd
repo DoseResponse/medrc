@@ -3,6 +3,7 @@
 \alias{vcov.metadrc}
 \alias{coef.metadrc}
 \alias{print.metadrc}
+\alias{summary.metadrc}
 
 \title{metadrc methods}
 \description{Methods for objects of class metadrc}
@@ -11,6 +12,7 @@
 \method{vcov}{metadrc}(object, ...)
 \method{coef}{metadrc}(object, ...)
 \method{print}{metadrc}(x, digits = max(3, getOption("digits") - 3), ...)
+\method{summary}{metadrc}(object, digits = max(3, getOption("digits") - 3), ...)
 }
 
 \arguments{
