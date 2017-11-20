@@ -27,6 +27,7 @@ metadrm <- function(formula, fct, ind, data, type="continuous", cid2=NULL, pms2=
     coefs <- rbind(coefs, coef(mod)) 
     vis <- rbind(vis, diag(vcov(mod)))
   }
+  rownames(coefs) <- ex
   npar <- ncol(coefs)
   
   est <- data.frame(ind = as.factor(rep(ex, times=npar)),

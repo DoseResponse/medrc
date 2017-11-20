@@ -8,7 +8,9 @@ df.residual.metadrc <- function(object, ...){
 }
 
 coef.metadrc <- function (object, ...){
-  return(object$coefficients)
+  cdat <- data.frame(object$coefmat)
+  names(cdat) <- object$parNames[[1]]
+  return(cdat)
 }
 
 print.metadrc <- function(x, digits = max(3, getOption("digits") - 3), ...){
@@ -111,4 +113,8 @@ summary.metadrc <- function(object, digits = max(3, getOption("digits") - 3), ..
     colnames(res.table)[c(1,2,3,4)] <- c("Estimate", "Std.Err", "z value", "Pr(>|z|)")
   }
   printCoefmat(res.table[,c(1,2,3,4)], has.Pvalue = TRUE)
+}
+
+confint.metadrc <- function(object, parm, level=0.95, fixed=TRUE, random=FALSE, ...){
+  confint.rma.mv(object$rma, fixed=fixed, random=random, ...)  
 }
