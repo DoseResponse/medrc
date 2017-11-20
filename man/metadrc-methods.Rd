@@ -2,6 +2,7 @@
 \alias{df.residual.metadrc}
 \alias{vcov.metadrc}
 \alias{coef.metadrc}
+\alias{coefficients.metadrc}
 \alias{print.metadrc}
 \alias{summary.metadrc}
 \alias{confint.metadrc}
@@ -12,6 +13,7 @@
 \method{df.residual}{metadrc}(object, ...)
 \method{vcov}{metadrc}(object, ...)
 \method{coef}{metadrc}(object, ...)
+\method{coefficients}{metadrc}(object, ...)
 \method{print}{metadrc}(x, digits = max(3, getOption("digits") - 3), ...)
 \method{summary}{metadrc}(object, digits = max(3, getOption("digits") - 3), ...)
 \method{confint}{metadrc}(object, parm, level=0.95, fixed=TRUE, random=FALSE, ...)

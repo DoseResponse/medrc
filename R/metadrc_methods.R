@@ -7,11 +7,20 @@ df.residual.metadrc <- function(object, ...){
   return(df.resid)
 }
 
-coef.metadrc <- function (object, ...){
-  cdat <- data.frame(object$coefmat)
-  names(cdat) <- object$parNames[[1]]
-  return(cdat)
+#coef.metadrc <- function(object, ...){
+#  cdat <- data.frame(object$coefmat)
+#  names(cdat) <- object$parNames[[1]]
+#  return(cdat)
+#}
+
+coef.metadrc <- function(object, ...){
+  return(object$coefficients) 
 }
+
+coefficients.metadrc <- function(object, ...){
+  return(object$coefficients) 
+}
+
 
 print.metadrc <- function(x, digits = max(3, getOption("digits") - 3), ...){
   cat("\nTwo-stage meta-analysis dose-response model\nModel fitted: ", x$fct$text, "\n",  sep = "")
