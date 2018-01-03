@@ -1,0 +1,261 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{An introduction to the medrc package}
+-->
+
+
+An introduction to the package medrc
+========================================
+
+
+```{r packages, echo=FALSE, warning=FALSE, message=FALSE}
+library(knitr)
+library(medrc)
+```
+
+
+Motivation
+---------------------
+
+The analysis of dose-response experiments using nonlinear models allows inference about the model parameters and the prediction of new response values. A common way to summarize the effect of an increasing dose level on the response is deriving parameters from the dose-response curve, like the effective dose $ED(p)$. Also the comparison of several curves by selectivity indices, like the relative potency, is available. For risk estimation in toxicology the estimation of benchmark dose (BMD) levels is a further important topic that is based on the nonlinear modeling of dose-response curves.
+
+
+The drc package [Ritz et al., 2015] allows the simultaneous fitting of several non-linear regression models, providing a common parameterization for several models and searching automatically for starting values. Several functions are available for model-averaging and inference of derived parameters.
+
+
+When analyzing dose-response curves, the observed data is often obtained from experiments with hierarchical designs, where the responses can be assigned to several known clusters. Instead of just assuming a single residual error in the dose-response model, the variability within and between clusters can be modeled. Either additional correlation parameters can be introduced to structure the residual error by generalized nonlinear least squares estimation or a distribution function for the cluster effects can be assumed separately to the distribution of the residuals in a mixed model framework.
+
+
+The nlme package [Pinheiro and Bates, 2000] provides functions to estimate parameters and variance components in nonlinear mixed models by (restricted) maximum likelihood. Some functions to parameterize the non-linear curve are already available, but it is also possible to provide your own modeling function.
+
+
+The medrc combines the automated dose-response modeling framework of the package drc with the nonlinear mixed estimation framework of the package nlme. Thereby, additional random effects can be introduced to the dose-response models with the unified parameterization of drc, with the availability of inference for derived parameters also for hierarchical models.
+
+
+
+Hierarchical dose-response models
+-------------------------------
+
+Following the notation of Davidian and Giltinan (1995, 2003), a nonlinear regression model with a single hierarchical level can be defined in two stages that parameterize the intra- and inter-curve specific variation, respectively.
+
+**Stage 1**: For the *i*th individual ($i=1,\dots,m$), we assume the following nonlinear regression model:
+$$ y_{ij} = f(x_{ij}, \boldsymbol{\beta}_{i}) + \epsilon_{ij} $$
+where $\{y_{i1}, \ldots, y_{i n_i} \}$ and $\{x_{i1}, \ldots, x_{i n_i} \}$ denote the vectors of response values and dose levels, respectively. The population mean dose-response curve is characterized by the dose-response function $f$ through curve-specific effect $\boldsymbol{\beta}_{i}$ (a $q \times 1$ vector). The residual error $\epsilon_i$ is assumed to be mean-zero normally distributed with variance-covariance matrix $\boldsymbol{\Lambda}_{i}$, which in practice often is assumed to be $\sigma^2 I_{n_i}$ or $diag(\sigma_1^2, \ldots, \sigma_{n_i}^2)$. 
+
+
+**Stage 2**: The inter-curve variation is captured by splitting the curve-specific effect $\boldsymbol{\beta}_{i}$ into components describing the systematic and random variation between curves:
+$$ \boldsymbol{\beta}_{i} = \boldsymbol{A}_{i}\boldsymbol{\beta} + \boldsymbol{B}_{i}\boldsymbol{b}_{i} $$
+where $\boldsymbol{A}_{i}$ and $\boldsymbol{B}_{i}$ denote the fixed-effects and random-effects design matrices, respectively, $\boldsymbol{\beta}$ denotes the fixed-effects parameters (a $p \times 1$ vector with $p \le q$), and the $b_i$'s denote the curve-specific random effects. The random effects can be assumed to follow a mean-zero normal distribution with a variance-covariance matrix denoted $\boldsymbol{G}$, which usually simply is the unstructured matrix.
+
+We restrict our model to a fixed effects parameterization of independent curves, using a dummy 0 and 1 coded design matrix $\boldsymbol{A}_{i}$, and allowing only random intercepts additively on the fixed effects parameters to represent the subject variability. This hierarchical model will cover many experimental settings in bioassay analysis and toxicology, like the comparison of several treatments in a dose-response experiment, where the responses are repeated measurements on the same experimental units or the experimental design consists of several blocks.
+
+
+### The metadrm function
+
+A flexible two-stage estimation approach is available with the function \texttt{metadrm()}, that combines estimates from individual \texttt{drm()} fits using the R package \emph{metafor} [Viechtbauer, 2010]. As a restriction, the \texttt{metadrm()} function can include only a single random grouping factor in the second stage.
+
+
+### The medrm function
+
+To fit a hierarchical dose-response model with the Lindstrom-Bates algorithm, the medrm function provides a wrapper around the function nlme (package nlme), providing a function interface similar to drc, but adding a random and correlation argument to define the hierarchical structure of the experimental design.
+
+
+Inference for derived parameters
+-------------------------------------
+
+Instead of interpreting the model parameters directly, we can set focus on derived parameters, like the effective dose at a specific level $ED(p)$ or the ratio of two effective doses, known as relative potency. 
+The effective dose $ED(p)$ is defined as the solution to the following inverse regression problem:
+$$ f(ED(p), \boldsymbol{\beta}) = \frac{p}{100} f(\infty, \boldsymbol{\beta}_{i}) + \left( 1 - \frac{p}{100} \right) f(0, \boldsymbol{\beta}_{i}) $$
+By definition $ED(p)$ values are relative quantities, relative to the lower and upper limits $\beta_2$ and $\beta_3$, which corresponds to $f(0, \boldsymbol{\beta}_{i})$ and $f(\infty, \boldsymbol{\beta}_{i})$, respectively, if $\beta_1<0$ (otherwise $\beta_2$ and $\beta_3$ swap places).
+The function *ED()* of package *drc* can be directly used with an medrc object to calculate the effective dose at (multiple) response levels conditional on random effects being equal to zero. Inference for the $ED(p)$ parameters, like hypotheses tests or corresponding confidence intervals, are available by using the Delta-method to approximate the variance-covariance of the derived parameters. 
+
+Another important concept used for summarizing dose-response data is the benchmark dose methodology. Ritz et al. (2013) proposed an operational definition of the benchmark dose concept for continuous endpoints, allowing for the incorporation of an a priori specified background level $p_0$ and benchmark response of interest *BMR*. The resulting BMD is obtained by solving the following equation:
+
+$$ \left[ \Phi^{-1}(1-p_0) - \Phi^{-1}\{1-(p_0+BMR)\} \right] \frac{\sigma}{f(\infty,\boldsymbol{\beta}_{i}) - f(0,\boldsymbol{\beta}_{i})} = \frac{f(BMD,\boldsymbol{\beta}_{i}) - f(0,\boldsymbol{\beta}_{i})}{f(\infty,\boldsymbol{\beta}_{i}) - f(0,\boldsymbol{\beta}_{i})}. $$
+By ignoring the variability in the ratio $\sigma \{f(\infty,\boldsymbol{\beta}_{i}) - f(0,\boldsymbol{\beta}_{i})\}^{-1}$ this definition implies that benchmark doses may be derived in the same way as ordinary effective doses defined above by specifying the non-standard response level.
+The function *BMD()* enables the computation of the BMD and lower confidence bounds (BMDL) for a medrc object, given the benchmark risk and a background risk level.
+
+
+
+### Model-averaged estimates
+
+By specifying the nonlinear function $f(x_{ij}, \boldsymbol{\beta}_{i})$ the principle shape of the curve is treated as known. Without any prior knowledge about the progress of the dose-response curve it is reasonable to choose from a larger set of dose-response models instead of assuming a single fixed function. With a set of candidate models a specific dose-response relationship can be selected based on the data, or model averaging approaches can be used to incorporate the model uncertainty into the parameter inference.
+
+The framework of package drc allows to fit several dose-response models to the same data in an automated fashion, with several, predefined dose-response curves, all of them composed of a similar set of similar defined parameters with lower and upper asymptotes, steepness, inflection points, etc. As these model functions can be directly used in medrc, the formula interfaces enable the composition of a set of models with different fixed and random effect parameterizations and different dose-response shapes.
+
+Model-averaged inference for the effective dose is available by the function *mmaED()*, allowing the input of several medrc model objects. By default the model parameters are estimated by maximum likelihood; it is not adviced to use the model averaging approach with REML estimates. Furthermore, only models with changes in the fixed effect parameterization OR the random effect structure should be combined.
+
+
+
+Case Studies
+----------------------------
+
+### Vinclozolin example
+
+Nellemann et al. (2003) carried out experiments to assess the in vitro effects of the fungicide vinclozolin. The data were obtained using an androgen receptor reporter gene assay, which was repeated six times (on different days). Each assay resulted in concentration-response data with nine concentrations (in $\mu$ M) of the fungicide, and the response measured was chemiluminescence (in luminescence units), so the same nine concentrations were used in all six assays. However, in one assay, only eight concentrations were used. 
+
+The dataset is available in the package drc.
+```{r vinclozolindata}
+data(vinclozolin)
+```
+
+Assuming a lower asymptote at 0 for the control, a three parameter log-logistic model can be assumed, estimating the upper asymptote, location of the inflection point, and steepness of the curve. The assay effect is treated as a normally distributed random effect, summarizing the between-assay variability by a $(3 \times 3)$ covariance matrix.
+
+```{r vinclozolinmixedmodel, warning=FALSE, message=FALSE}
+# meta analysis approach
+m1 <- metadrm(effect ~ conc,
+              data=vinclozolin,
+              fct=LL.3(),
+              ind=exper,
+              struct="UN")
+summary(m1)
+
+# nonlinear mixed-effects model
+m2 <- medrm(effect ~ conc, data=vinclozolin,
+            random=b + d + e ~ 1|exper,
+            fct=LL.3(), start=c(0.5, 2000, 0.05))
+summary(m2)
+```
+
+
+The effective doses can be estimated at several response levels, conditional on random effects being equal to zero, using the function *ED()*.
+
+```{r vincloED, warning=FALSE, message=FALSE}
+ED(m1, respLev=c(15, 50, 85))
+ED(m2, respLev=c(15, 50, 85))
+```
+
+medrc provides an automated plot method for the nlme objects using ggplot2. 
+
+```{r, warning=FALSE, message=FALSE}
+plot(m2, logx=TRUE, ndose=25, ranef=TRUE) +
+  theme_bw()
+```
+
+
+
+
+### Spinach example
+
+Streibig and Dayan (1999) investigated the inhibition of photosynthesis in response to two synthetic photosystem II inhibitors, the herbicides diuron and bentazon. In an experiment, the effect of oxygen consumption of thylakoid membranes (chloroplasts) from spinach was measured after incubation with the synthetic inhibitors in five assays, three treated with bentazon and two with diuron. For each assay six increasing herbicide concentrations were applied together with a negative control, using different dose ranges on a logarithmic scale for the two treatments based on preliminary experiments to encompass the whole dose-response range.
+
+The dataset is available in the package drc.
+```{r spinachdata, warning=FALSE, message=FALSE}
+data(spinach)
+spinach$CURVE <- as.factor(spinach$CURVE)
+```
+
+
+For the comparison of the two herbicides, two dose-response curves are fitted under assumption of a three parameter log-logistic model with a separate set of fixed effects coefficients for each treatment. Random effects are included for each of the three parameters to model the between assay variability. Using the information of the between assay variability by the additional distributional assumptions of the random intercepts is especially advantageous, as the dose levels for the two herbicides do not cover the same dose range.
+
+As for the Vinclozolin example, either a nonlinear mixed model or a generalized nonlinear least-squares model can be fitted.
+
+```{r spinachmodel, warning=FALSE, message=FALSE}
+# meta analysis approach
+sm1 <- metadrm(SLOPE ~ DOSE, 
+               data=spinach,
+               fct=LL.3(),
+               ind=CURVE,
+               cid2=HERBICIDE,
+               struct="UN")
+summary(sm1)
+
+### nlme
+sm2 <- medrm(SLOPE ~ DOSE, 
+             curveid=b + d + e ~ HERBICIDE, 
+             data=spinach, 
+             fct=LL.3(), 
+             random = b + d + e ~ 1|CURVE,
+             start=c(0.5, 1, 1.5, 1.5, 1.5, 0.3))
+summary(sm2)
+```
+
+
+The two fixed effect curves are compared by the ratio of effective dose estimates. 
+
+```{r spinachSI, warning=FALSE, message=FALSE}
+cmat <- rbind(c(1, 1), 
+              c(2, 2), 
+              c(3, 3))
+
+# comparing effective dose levels for meta analysis
+EDcomp(sm1, 
+       percVec=c(15, 50, 85), 
+       percMat=cmat, 
+       interval="fieller")
+
+# comparing effective dose levels for nlme
+EDcomp(sm2, 
+       percVec=c(15, 50, 85), 
+       percMat=cmat, 
+       interval="fieller")
+```
+
+The predicted curves can be plotted:
+```{r spinachplot, warning=FALSE, message=FALSE}
+library(dplyr)
+library(tidyr)
+pdata <- spinach %>%
+  group_by(CURVE, HERBICIDE) %>%
+  expand(DOSE=exp(seq(-5, 5, length=50)))
+pdata$SLOPEind <- predict(sm2, newdata=pdata)
+pdata$SLOPE <- predict(sm2, newdata=pdata, level=0)
+
+ggplot(spinach, aes(x=log(DOSE), y=SLOPE, 
+                    colour=HERBICIDE, group=CURVE, shape=HERBICIDE)) +
+  geom_point() +
+  geom_line(data=pdata) +
+  geom_line(data=pdata, aes(y=SLOPEind), linetype=2) +
+  theme_bw() +
+  scale_x_continuous("DOSE", 
+                     breaks=log(c(0.01, 0.1, 1, 10, 100)), 
+                     labels=c(0.01, 0.1, 1, 10, 100))
+```
+
+
+
+
+### 3T3 mouse fibroblasts and NRU assay
+
+The toxicity of sodium valproate was tested, using the 3T3 mouse fibroblasts and neutral red uptake (NRU) assay. 22 different experiments were performed independently in six laboratories, using eight concentration levels, each with six replicates on a 96-well plate. In addition, twelve measurements were taken for the solvent control. See Clothier et al. (2013) for more information.
+
+```{r mdradata, warning=FALSE, message=FALSE}
+data(mdra)
+```
+
+
+A 3-parameter log-logistic model was fitted with two levels of hierarchical random effects, treating the laboratory effect and the experiment effect on the upper asymptote and on the ED50 parameter as a random effect. In this way, the hierarchical layout of the data is represented, modelling the variability between laboratories and between experiments within a laboratory. No random laboratory or experiment variation is assigned to the slope parameters in order to reduce model complexity and ensure convergence of the parameter estimation algorithm.
+
+
+```{r mdramodel, fig.width=6, warning=FALSE, message=FALSE}
+mdramod <- medrm(Response ~ Concentration, data=mdra, fct=LL.3(), 
+           random=d + e ~ 1|LabID/ExperimentID, 
+           weights=varExp(form=~Concentration),
+           control=nlmeControl(tolerance=0.1, pnlsTol=1)) 
+plot(mdramod, logx=TRUE, ndose=250, ranef=TRUE) + theme_classic()
+```
+
+
+
+
+References
+========================
+
+* Clothier, R., Gomez-Lechon, M. J., Kinsner-Ovaskainen, A., Kopp-Schneider, A., O'Connor, J. E., Prieto, P., and Stanzel, S. (2013). Comparative analysis of eight cytotoxicity assays evaluated within the ACuteTox Project. *Toxicology in vitro*, **27**(4):1347--1356.
+
+* Davidian, M. and Giltinan, D. M. (1995). *Nonlinear Models for Repeated Measurement Data*. Chapman & Hall/CRC Monographs on Statistics & Applied Probability, London.
+
+* Davidian, M. and Giltinan, D. M. (2003). Nonlinear models for repeated measurement data: An overview and update. *Journal of Agricultural, Biological, and Environmental Statistics*, **8**(4):387--419.
+
+* Nellemann, C., Majken, D., Lam, H. R., and Vinggaard, A. M. (2003). The Combined Effects of Vinclozolin and Procymidone Do Not Deviate from Expected Additivity in Vitro and in Vivo. *Toxicological Sciences*, **71**(2):251--262.
+
+* Pinheiro, J. C. and Bates, D. M. (2000). *Mixed-Effects Models in S and S-Plus*. Statistics and Computing. Springer.
+
+* Ritz, C., Gerhard, D., and Hothorn, L. A. (2013). A Unified Framework for Benchmark Dose Estimation Applied to Mixed Models and Model Averaging. *Statistics in Biopharmaceutical Research*, **5**(1):79--90.
+
+* Ritz, C., Baty, F., Streibig, J. C., & Gerhard, D. (2015). Dose-response analysis using R. *PLoS ONE*, **10**(12), e0146021. https://doi.org/10.1371/journal.pone.0146021
+
+* Streibig, J. C. and Dayan, F. E. (1999). Joint action of natural and synthetic photosystem II inhibitors. *Pesticide Science*, **146**(1998):137--146.
+
+* Viechtbauer, W. (2010). Conducting Meta-Analyses in R with the metafor Package. *Journal of Statistical Software*, **36**(3), 1--48. https://doi.org/10.18637/jss.v036.i03
+

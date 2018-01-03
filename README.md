@@ -1,5 +1,5 @@
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/medrc)](https://cran.r-project.org/package=medrc) [![Build Status](https://travis-ci.org/daniel-gerhard/medrc.svg?branch=master)](https://travis-ci.org/daniel-gerhard/medrc) [![Downloads](https://cranlogs.r-pkg.org/badges/medrc)](https://cranlogs.r-pkg.org/)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/medrc)](https://cran.r-project.org/package=medrc) [![Build Status](https://travis-ci.org/DoseResponse/medrc.svg?branch=master)](https://travis-ci.org/DoseResponse/medrc) [![Downloads](https://cranlogs.r-pkg.org/badges/medrc)](https://cranlogs.r-pkg.org/)
 
 medrc
 =====
