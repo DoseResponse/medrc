@@ -11,6 +11,6 @@ Description: Uses a combination of package drc and nlme to fit nonlinear mixed e
 Depends: drc, nlme, ggplot2, drcData, metafor
 Imports: statmod, plyr, gtools, multcomp, Matrix
 VignetteBuilder: knitr
-Suggests: knitr, mratios, numDeriv, minqa, nloptr, dfoptim, ucminf
+Suggests: knitr, mratios, numDeriv, minqa, nloptr, dfoptim, ucminf, dplyr
 License: GPL
 LazyLoad: yes
