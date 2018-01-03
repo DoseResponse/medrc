@@ -143,7 +143,7 @@
 <span class='fu'>data</span>(<span class='no'>DNase</span>)
 <span class='no'>DNase</span>$<span class='no'>Run</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>DNase</span>$<span class='no'>Run</span>, <span class='kw'>levels</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>11</span>)
 
-<span class='fu'>ggplot</span>(<span class='no'>DNase</span>, <span class='fu'>aes</span>(<span class='kw'>y</span><span class='kw'>=</span><span class='no'>density</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>conc</span>, <span class='kw'>colour</span><span class='kw'>=</span><span class='no'>Run</span>)) + <span class='fu'>geom_point</span>() + <span class='fu'>coord_trans</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='st'>"log"</span>)</div><div class='img'><img src='glsdrm-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>ggplot</span>(<span class='no'>DNase</span>, <span class='fu'>aes</span>(<span class='kw'>y</span><span class='kw'>=</span><span class='no'>density</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>conc</span>, <span class='kw'>colour</span><span class='kw'>=</span><span class='no'>Run</span>)) + <span class='fu'>geom_point</span>() + <span class='fu'>coord_trans</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='st'>"log"</span>)</div><div class='img'><img src='glsdrm-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 
 <span class='co'>#############</span>
 <span class='co'># fit a 5-parameter log-logistic model for each Run</span>
@@ -161,7 +161,7 @@
 <span class='co'># a 4-parameter log-Normal model</span>
 <span class='no'>mcln</span> <span class='kw'>&lt;-</span> <span class='fu'>glsdrm</span>(<span class='no'>density</span> ~ <span class='no'>conc</span>, <span class='kw'>curveid</span><span class='kw'>=</span><span class='no'>b</span> + <span class='no'>c</span> + <span class='no'>d</span> + <span class='no'>e</span> ~ <span class='no'>Run</span>,
                <span class='kw'>fct</span><span class='kw'>=</span><span class='fu'>LN.4</span>(), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>DNase</span>)
-<span class='fu'>plot</span>(<span class='no'>mcln</span>, <span class='kw'>logx</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>ndose</span><span class='kw'>=</span><span class='fl'>100</span>)</div><div class='img'><img src='glsdrm-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>mcln</span>, <span class='kw'>logx</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>ndose</span><span class='kw'>=</span><span class='fl'>100</span>)</div><div class='img'><img src='glsdrm-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 # AIC comparison
 #AIC(mc, mcd, mcln)
 
