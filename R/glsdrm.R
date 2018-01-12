@@ -1,3 +1,25 @@
+#' Dose-response curve estimation by generalized least squares
+#' 
+#' Implements drc nonlinear functions into the nlme framework for nonlinear GLS dose-response modeling.
+#' 
+#' An application of glsdrm is shown on the help pages of data \code{\link{broccoli}}. EDx and selectivity indices can be calculated with functions \code{\link[drc]{ED}} and \code{\link[drc]{EDcomp}}. Model-averaged ED can be computed by function \code{\link{mmaED}}.
+#' 
+#' @param form Formula describing the dose-response relationship
+#' @param curveid Formula with parameter names on the left hand side (divided by +) and a column name in data, denoting a factor, to estimate separate parameters per factor-level. If NULL only fixed effects for a single curve will be estimated.
+#' @param data a data.frame object
+#' @param fct a function of the drc package
+#' @param correlation additional corClasses object
+#' @param weights additional varClasses object
+#' @param control list with nlme control arguments
+#' @param start optional list with initial values for the fixed components. If NULL the initial values will be found automatically
+#' 
+#' @return An object of class glsdrc
+#' 
+#' @seealso \code{\link[drc]{drm}}, \code{\link[nlme]{gls}}
+#' 
+#' @keywords models
+
+
 glsdrm <-
 function(form, curveid=NULL, data, fct, correlation=NULL, weights=NULL, control=NULL, start=NULL){
   callDetail <- match.call()

@@ -82,14 +82,12 @@
     </div>
 
     
-    <p>Estimates ED for averaged fixed effects of several medrc or glsdrc objects</p>
+    <p>Estimates ED for averaged fixed effects of several medrc or glsdrc objects.</p>
     
 
-    <pre class="usage"><span class='fu'>mmaED</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='no'>respLev</span>,
-      <span class='kw'>ic</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"AIC"</span>, <span class='st'>"BIC"</span>),
-      <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>, <span class='st'>"buckland"</span>, <span class='st'>"kang"</span>),
-     <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>marginal</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>nGQ</span><span class='kw'>=</span><span class='fl'>5</span>,
-     <span class='kw'>rfinterval</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1000</span>))</pre>
+    <pre class="usage"><span class='fu'>mmaED</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='no'>respLev</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"AIC"</span>, <span class='st'>"BIC"</span>), <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>,
+  <span class='st'>"buckland"</span>, <span class='st'>"kang"</span>), <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>marginal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>nGQ</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>rfinterval</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1000</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -99,7 +97,7 @@
       <td><p>an medrc object</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>further medrc objects</p></td>
     </tr>
     <tr>
@@ -112,8 +110,7 @@
     </tr>
     <tr>
       <th>interval</th>
-      <td><p>character string specifying the type of confidence
-    intervals to be supplied.</p></td>
+      <td><p>character string specifying the type of confidence intervals to be supplied.</p></td>
     </tr>
     <tr>
       <th>level</th>
@@ -129,7 +126,7 @@
     </tr>
     <tr>
       <th>rfinterval</th>
-      <td><p>numeric vector. Interval for root finding (uniroot) to search for ED values. Default is [0, 1000].</p></td>
+      <td><p>numeric vector. Interval for root finding (uniroot) to search for ED values.</p></td>
     </tr>
     </table>
     
@@ -141,8 +138,6 @@
       <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
-    <h2>Author</h2>
-    Christian Ritz, Daniel Gerhard
   </div>
 </div>
 

@@ -1,3 +1,14 @@
+#' Plot multiple medrc objects
+#' 
+#' Plot multiple predicted dose-response curves based on fixed effect estimates from multiple medrc objects
+#' 
+#' @param x An object of class medrc
+#' @param ... further objects of class medrc
+#' @param ndose Number of points to interpolate the dose response curve
+#' @param logx If TRUE, plot x-axis on a logarithmic scale
+#' 
+#' @keywords graphics
+
 mmplot <- function(x, ..., ndose=25, logx=FALSE){
   lllist <- list(x, ...)
   ismedrc <- sapply(lllist, function(x) inherits(x, "medrc") | inherits(x, "glsdrc"))

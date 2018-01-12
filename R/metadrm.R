@@ -1,3 +1,25 @@
+#' 2-stage estimation in hierarchical dose-response models via meta-analysis
+#' 
+#' A two-stage meta-analysis approach to fit hierarchical dose-response models.
+#' 
+#' This function estimates population parameters from individual drm fits, using the metafor package.
+#' 
+#' @param formula a symbolic description of the model to be fit. Either of the form 'response \eqn{~} dose' or as a data frame with response values in first column and dose values in second column.
+#' @param fct a list with three or more elements specifying the non-linear function, the accompanying self starter function, the names of the parameter in the non-linear function and, optionally, the first and second derivatives as well as information used for calculation of ED values. Currently available functions include, among others, the four- and five-parameter log-logistic models \code{\link{LL.4}}, \code{\link{LL.5}} and the Weibull model \code{\link{W1.4}}. Use \code{\link{getMeanFunctions}} for a full list.
+#' @param ind a factor identifying individual curves.
+#' @param data an optional data frame containing the variables in the model.
+#' @param type a character string specifying the distribution of the data (parameter estimation will depend on the assumed distribution as different log likelihood functions will be used). 
+#' The default is "continuous", corresponding to assuming a normal distribution. The choices "binary" and "event" imply a binomial and multinomial distribution, respectively. The choice "ssd" is for fitting a species sensitivity distribution.
+#' @param cid2 a numeric vector or factor containing the between-curve grouping of the data.
+#' @param pms2 a list containing a formula for each parameter in the nonlinear function.
+#' @param struct correlation structure between population coefficients, either "CS" for compound symmetry, "HCS" for heteroscedastic compound symmetry, "UN" for an unstructured variance-covariance matrix, "ID" for a scaled identity matrix, "DIAG" for a diagonal matrix, "AR" for an AR(1) autoregressive structure, or "HAR" for a heteroscedastic AR(1) autoregressive structure.
+#' @param method character string specifying whether the meta-analysis model should be fitted via maximum-likelihood ("ML") or via restricted maximum-likelihood ("REML") estimation. Default is "REML".
+#' @param ... further arguments supplied to function drm.
+#' 
+#' @return An object of class 'metadrc'. 
+#' 
+#' @keywords models
+
 metadrm <- function(formula, fct, ind, data, type="continuous", cid2=NULL, pms2=NULL, struct="UN", method="REML", ...){
   mf <- mfr <- call <- match.call(expand.dots = TRUE)
   nmf <- names(mf)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The four-parameter Weibull functions — meW • medrc</title>
+<title>Four-parameter Weibull functions — meW1.2 • medrc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -78,24 +78,24 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The four-parameter Weibull functions</h1>
+    <h1>Four-parameter Weibull functions</h1>
     </div>
 
     
     <p>'W1.X' and 'W2.X' provide the X-parameter Weibull functions.</p>
     
 
-    <pre class="usage"><span class='fu'>meW1.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+    <pre class="usage"><span class='fu'>meW1.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meW1.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meW1.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meW1.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)
+<span class='fu'>meW1.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meW2.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meW2.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meW2.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meW2.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meW2.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)</pre>
+<span class='fu'>meW2.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -109,33 +109,32 @@
       <td><p>steepness</p></td>
     </tr>
     <tr>
-      <th>c</th>
-      <td><p>lower limit</p></td>
+      <th>e</th>
+      <td><p>ED50</p></td>
     </tr>
     <tr>
       <th>d</th>
       <td><p>upper limit</p></td>
     </tr>
     <tr>
-      <th>e</th>
-      <td><p>ED50</p></td>
+      <th>c</th>
+      <td><p>lower limit</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>As pointed out in Seber and Wild (1989), there exist two different parameterisations of the Weibull model. They
-  do not yield the same fitted curve for a given dataset (see under Examples).</p>
-<p>The four-parameter Weibull type 1 model ('weibull1') is
-  $$ f(x) = c + (d-c) \exp(-\exp(b(\log(x)-\log(e)))).$$</p> 
-<p>Thw four-parameter Weibull type 2 model ('weibull2') is
-  $$ f(x) = c + (d-c) (1 - \exp(-\exp(b(\log(x)-\log(e))))).$$</p>  
-<p>Both four-parameter model functions are asymmetric with inflection point at the dose equal \(e\).</p>
+    <p>As pointed out in Seber and Wild (1989), there exist two different parameterisations of the Weibull model. They do not yield the same fitted curve for a given dataset.
+The four-parameter Weibull type 1 model ('weibull1') is
+$$ f(x) = c + (d-c) \exp(-\exp(b(\log(x)-\log(e)))).$$
+Thw four-parameter Weibull type 2 model ('weibull2') is
+$$ f(x) = c + (d-c) (1 - \exp(-\exp(b(\log(x)-\log(e))))).$$ 
+Both four-parameter model functions are asymmetric with inflection point at the dose equal \(e\).</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Seber, G. A. F. and Wild, C. J (1989) <em>Nonlinear Regression</em>, New York: Wiley \&amp; Sons (pp. 330--331).</p>  
-<p>Ritz, C (2009) Towards a unified approach to dose-response modeling in ecotoxicology <em>To appear in Environ Toxicol Chem</em>.</p>
+    <p>Seber, G. A. F. and Wild, C. J (1989) <em>Nonlinear Regression</em>, New York: Wiley \&amp; Sons (pp. 330--331).
+Ritz, C (2009) Towards a unified approach to dose-response modeling in ecotoxicology <em>To appear in Environ Toxicol Chem</em>.</p>
     
 
   </div>
@@ -149,8 +148,6 @@
       <li><a href="#references">References</a></li>
           </ul>
 
-    <h2>Author</h2>
-    Daniel Gerhard
   </div>
 </div>
 

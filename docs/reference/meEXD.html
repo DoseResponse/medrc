@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Exponential decay model — meEXD • medrc</title>
+<title>Exponential decay model — meEXD.2 • medrc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -87,18 +87,14 @@
 
     <pre class="usage"><span class='fu'>meEXD.2</span>(<span class='no'>x</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meEXD.3</span>(<span class='no'>x</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)</pre>
+<span class='fu'>meEXD.3</span>(<span class='no'>x</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>numeric dose vector.</p></td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td><p>lower limit</p></td>
+      <td><p>numeric dose vector</p></td>
     </tr>
     <tr>
       <th>d</th>
@@ -108,21 +104,21 @@
       <th>e</th>
       <td><p>steepness</p></td>
     </tr>
+    <tr>
+      <th>c</th>
+      <td><p>lower limit</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The exponential decay model is a three-parameter model with mean function:</p>  
-<p>$$f(x) = c + (d-c)(\exp(-x/e))$$</p>  
-<p>The parameter init is the upper limit (attained at \(x=0\)), the parameter plateau is the lower limit 
-  reached for x going to infinity and the parameter \(e&gt;0\) is determining the steepness of the 
-  decay. The curve is monotonously decreasing in \(x\).</p>
+    <p>The exponential decay model is a three-parameter model with mean function:
+$$f(x) = c + (d-c)(\exp(-x/e))$$
+The parameter init is the upper limit (attained at \(x=0\)), the parameter plateau is the lower limit reached for x going to infinity and the parameter \(e&gt;0\) is determining the steepness of the decay. The curve is monotonously decreasing in \(x\).</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Organisation for Economic Co-operation and Development (OECD) (2006)
-  <em>Current approaches in the statistical analysis of ecotoxicity data: A guidance to application - annexes</em>,
-  Paris: OECD (p. 80).</p>
+    <p>Organisation for Economic Co-operation and Development (OECD) (2006) <em>Current approaches in the statistical analysis of ecotoxicity data: A guidance to application - annexes</em>, Paris: OECD (p. 80).</p>
     
 
   </div>
@@ -136,8 +132,6 @@
       <li><a href="#references">References</a></li>
           </ul>
 
-    <h2>Author</h2>
-    Daniel Gerhard
   </div>
 </div>
 

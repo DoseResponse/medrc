@@ -1,0 +1,47 @@
+reference:
+- title: Fitting hierarchical dose resonse models
+  contents:
+  - medrm
+  - metadrm
+  - glsdrm
+- title: Dose-response functions
+  contents:
+  - meAR.2
+  - meAR.3
+  - meEXD.2
+  - meEXD.3
+  - meL.2
+  - meL.3
+  - meL.4
+  - meL.5
+  - meLL.2
+  - meLL.3
+  - meLL.4
+  - meLL.5
+  - meLN.2
+  - meLN.3
+  - meLN.4
+  - meLLN.4
+  - meW1.2
+  - meW1.3
+  - meW1.4
+  - meW2.2
+  - meW2.3
+  - meW2.4
+- title: Derived parameters
+  contents:
+  - BMD
+  - BMDadjresp
+  - BMDmarg
+  - EDmarg
+  - mmaBMD
+  - mmaED
+- title: Misc
+  contents: 
+  - LL4.loged
+  - LN4.loged
+  - W14.loged
+  - W24.loged
+  - mmplot
+  - plot.glsdrc
+  - plot.medrc

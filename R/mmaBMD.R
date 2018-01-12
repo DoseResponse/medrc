@@ -1,3 +1,21 @@
+#' BMD estimation for averaged medrc or glsdrc models
+#' 
+#' Estimates the benchmark dose for averaged fixed effects of several medrc or glsdrc objects
+#' 
+#' @param object an medrc object
+#' @param ... further medrc objects
+#' @param respLev a numeric vector containing the benchmark response levels
+#' @param ic the information criterion used for model averaging
+#' @param interval character string specifying the type of confidence intervals to be supplied.
+#' @param level confidence level, default at 0.95
+#' @param bmd benchmark dose estimation (smallest dose resulting in a probability of an abnormal response)
+#' @param background probability of an abnormal response
+#' @param marginal logical. If TRUE, marginalized BMD estimates are obtained. See BMDmarg for further information.
+#' @param nGQ integer. Specifies the number nof nodes for Gauss-Hermite quadrature.
+#' @param rfinterval numeric vector. Interval for root finding (uniroot) to search for ED values.
+#' 
+#' @keywords htest
+
 mmaBMD <- function(object, ..., respLev, ic = c("AIC", "BIC"), interval = c("none", "buckland", "kang"), level = 0.95, bmd = c("additional", "extra"), background = 0.05, marginal=FALSE, nGQ=5, rfinterval=c(0, 1000)){
   interval <- match.arg(interval)
   ic <- match.arg(ic)

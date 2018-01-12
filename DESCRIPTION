@@ -1,8 +1,8 @@
 Package: medrc
 Type: Package
 Title: Mixed effect dose-response curves
-Version: 1.0-0
-Date: 2018-01-03
+Version: 1.1-0
+Date: 2018-01-12
 Authors@R: c(person("Daniel", "Gerhard", role = c("aut", "cre"),
 		     email = "00gerhard@gmail.com"),
 	      person("Christian", "Ritz", role = "aut"))
@@ -14,3 +14,4 @@ VignetteBuilder: knitr
 Suggests: knitr, mratios, numDeriv, minqa, nloptr, dfoptim, ucminf, dplyr, tidyr
 License: GPL
 LazyLoad: yes
+RoxygenNote: 6.0.1

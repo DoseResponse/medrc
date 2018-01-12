@@ -1,3 +1,28 @@
+#' Mixed effects dose-response curves
+#' 
+#' Implements drc nonlinear functions into the nlme framework for mixed effects dose-response modelling.
+#' 
+#' An application of medrm is shown on the help pages of data \code{\link{broccoli}}. EDx and selectivity indices can be calculated with functions \code{\link[drc]{ED}} and \code{\link[drc]{EDcomp}}. Model-averaged ED can be computed by function \code{\link{mmaED}}.
+#' Marginal EDx and corresponding function are implemented in functions \code{\link{EDmarg}}, using numerical integration conditional on the etimated variance components.
+#' 
+#' @param form Formula describing the dose-response relationship
+#' @param curveid Formula with parameter names on the left hand side (divided by +) and a column name in data, denoting a factor, to estimate separate parameters per factor-level. If NULL only fixed effects for a single curve will be estimated.
+#' @param data a data.frame object
+#' @param fct a function of the drc package
+#' @param random a list or one-sided formula describing the random effects
+#' @param correlation additional corClasses object
+#' @param weights additional varClasses object
+#' @param control list with nlme control arguments
+#' @param start optional list with initial values for the fixed components. If NULL the initial values will be found automatically.
+#' @param REML logical value. If TRUE the model is fit by maximizing the restricted log-likelihood, if FALSE log-likelihood is maximized.
+#' 
+#' @return An object of class medrc
+#' 
+#' @seealso \code{\link[drc]{drm}}, \code{\link[nlme]{nlme}}
+#' 
+#' @keywords models
+
+
 medrm <-
 function(form, curveid=NULL, data, fct, random, correlation=NULL, weights=NULL, control=NULL, start=NULL, REML=FALSE){
   callDetail <- match.call()

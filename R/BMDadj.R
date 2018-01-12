@@ -1,3 +1,14 @@
+#' Adjusted ED response levels for BMD estimation based on medrc or glsdrc models
+#' 
+#' Calculates adjusted response levels for estimation of the BMD
+#' 
+#' @param object an medrc object
+#' @param respLev a numeric vector containing the benchmark response levels
+#' @param bmd benchmark dose estimation (smallest dose resulting in a probability of an abnormal response)
+#' @param background probability of an abnormal response
+#' 
+#' @keywords htest
+
 BMDadjresp <- function (object, respLev, bmd = c("additional", "extra"), background = 0.05){ 
   bmd <- match.arg(bmd)
   if (bmd[1] == "extra") 

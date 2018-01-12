@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log-normal dose-response model — meLN • medrc</title>
+<title>Log-normal dose-response model — meLN.2 • medrc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -82,66 +82,57 @@
     </div>
 
     
-    <p><code>LN.X</code> and the accompanying convenience functions provide a general framework for specifying 
-  the mean function of the decreasing or incresing log-normal dose-response model.</p>
+    <p><code>LN.X</code> and the accompanying convenience functions provide a general framework for specifying the mean function of the decreasing or incresing log-normal dose-response model.</p>
     
 
-    <pre class="usage"><span class='fu'>meLN.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+    <pre class="usage"><span class='fu'>meLN.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meLLN.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meLN.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meLN.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meLN.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meLN.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)</pre>
+<span class='fu'>meLLN.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>numeric dose vector.</p></td>
+      <td><p>numeric dose vector</p></td>
     </tr>
     <tr>
       <th>b</th>
       <td><p>steepness</p></td>
     </tr>
     <tr>
-      <th>c</th>
-      <td><p>lower limit</p></td>
+      <th>e</th>
+      <td><p>ED50</p></td>
     </tr>
     <tr>
       <th>d</th>
       <td><p>upper limit</p></td>
     </tr>
     <tr>
-      <th>e</th>
-      <td><p>ED50</p></td>
+      <th>c</th>
+      <td><p>lower limit</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For the case where log(ED50), denoted \(e\) in the equation below, is a parameter in the model, 
-  the mean function is:</p>  
-<p>$$f(x) = c + (d-c)(\Phi(b(\log(x)-e)))$$</p>
-<p>and the mean function is:</p>  
-<p>$$f(x) = c + (d-c)(\Phi(b(\log(x)-\log(e))))$$</p>
-<p>in case ED50, which is also denoted \(e\), is a parameter in the model. If the former model is fitted
-  any estimated ED values will need to be back-transformed subsequently in order to obtain effective doses
-  on the original scale.</p>
-<p>The mean functions above yield the same models as those described by Bruce and Versteeg (1992),
-  but using a different parameterisation (among other things the natural logarithm is used).</p>  
-<p>For the case \(c=0\) and \(d=1\), the log-normal model reduces the classic probit model (Finney, 1971) 
-  with log dose as explanatory variable (mostly used for quantal data). This special case is available through
-  the convenience function <code>meLN.2</code>.</p>  
-<p>The case \(c=0\) is available as the function <code>meLN.3</code>. The full four-parameter model is available
-  through <code>meLN.4</code>.</p>
+    <p>For the case where log(ED50), denoted \(e\) in the equation below, is a parameter in the model, the mean function is:
+$$f(x) = c + (d-c)(\Phi(b(\log(x)-e)))$$
+and the mean function is:
+$$f(x) = c + (d-c)(\Phi(b(\log(x)-\log(e))))$$  
+in case ED50, which is also denoted \(e\), is a parameter in the model. If the former model is fitted any estimated ED values will need to be back-transformed subsequently in order to obtain effective doses on the original scale.
+The mean functions above yield the same models as those described by Bruce and Versteeg (1992), but using a different parameterisation (among other things the natural logarithm is used).
+For the case \(c=0\) and \(d=1\), the log-normal model reduces the classic probit model (Finney, 1971) with log dose as explanatory variable (mostly used for quantal data). This special case is available through the convenience function <code>meLN.2</code>.
+The case \(c=0\) is available as the function <code>meLN.3</code>. The full four-parameter model is available through <code>meLN.4</code>.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Finney, D. J. (1971) <em>Probit analysis</em>, London: Cambridge University Press.</p>
-<p>Bruce, R. D. and Versteeg, D. J. (1992) A statistical procedure for modeling continuous toxicity data,
-  <em>Environ. Toxicol. Chem.</em>, <b>11</b>, 1485--1494.</p>
+    <p>Finney, D. J. (1971) <em>Probit analysis</em>, London: Cambridge University Press.
+Bruce, R. D. and Versteeg, D. J. (1992) A statistical procedure for modeling continuous toxicity data, <em>Environ. Toxicol. Chem.</em>, <b>11</b>, 1485--1494.</p>
     
 
   </div>
@@ -155,8 +146,6 @@
       <li><a href="#references">References</a></li>
           </ul>
 
-    <h2>Author</h2>
-    Daniel Gerhard
   </div>
 </div>
 

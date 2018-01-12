@@ -1,3 +1,17 @@
+#' BMD estimation for medrc or glsdrc models
+#' 
+#' Estimates the benchmark dose for fixed effects of medrc or glsdrc objects
+#' 
+#' @param object an medrc object
+#' @param respLev a numeric vector containing the benchmark response levels
+#' @param interval character string specifying the type of confidence intervals to be supplied.
+#' @param level confidence level, default at 0.95
+#' @param bmd benchmark dose estimation (smallest dose resulting in a probability of an abnormal response)
+#' @param background probability of an abnormal response
+#' @param display logical. If TRUE results are displayed; otherwise they are not
+#' 
+#' @keywords htest
+
 BMD <- function(object, respLev, interval = c("none", "delta", "fls", "tfls"), level = 0.95, bmd = c("additional", "extra"), background = 0.05, display=TRUE){
   interval <- match.arg(interval)
   bmd <- match.arg(bmd)

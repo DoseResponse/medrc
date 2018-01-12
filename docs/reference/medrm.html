@@ -82,12 +82,11 @@
     </div>
 
     
-    <p>Implements drc nonlinear functions into the nlme framework for mixed
-effects dose-response modeling.</p>
+    <p>Implements drc nonlinear functions into the nlme framework for mixed effects dose-response modelling.</p>
     
 
-    <pre class="usage"><span class='fu'>medrm</span>(<span class='no'>form</span>, <span class='kw'>curveid</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>data</span>, <span class='no'>fct</span>, <span class='no'>random</span>, <span class='kw'>correlation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-      <span class='kw'>control</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>REML</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>medrm</span>(<span class='no'>form</span>, <span class='kw'>curveid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>data</span>, <span class='no'>fct</span>, <span class='no'>random</span>, <span class='kw'>correlation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>control</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>REML</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -138,106 +137,16 @@ effects dose-response modeling.</p>
 
     <p>An object of class medrc</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>An application of medrm is shown on the help pages of data <code>broccoli</code>. EDx and selectivity indices can be calculated with functions <code><a href='http://www.rdocumentation.org/packages/drc/topics/ED.drc'>ED</a></code> and <code><a href='http://www.rdocumentation.org/packages/drc/topics/EDcomp'>EDcomp</a></code>. Model-averaged ED can be computed by function <code><a href='mmaED.html'>mmaED</a></code>.
+Marginal EDx and corresponding function are implemented in functions <code><a href='EDmarg.html'>EDmarg</a></code>, using numerical integration conditional on the etimated variance components.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='http://www.rdocumentation.org/packages/drc/topics/drm'>drm</a></code>, <code><a href='http://www.rdocumentation.org/packages/nlme/topics/nlme'>nlme</a></code></p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>An application of medrm is shown on the help pages of data <code>broccoli</code>. EDx and selectivity indices can be calculated with functions <code><a href='http://www.rdocumentation.org/packages/drc/topics/ED.drc'>ED</a></code> and <code><a href='http://www.rdocumentation.org/packages/drc/topics/EDcomp'>EDcomp</a></code>. Model-averaged ED can be computed by function <code><a href='mmaED.html'>mmaED</a></code>.</p>
-<p>Marginal EDx and corresponding function are implemented in functions <code><a href='EDmarg.html'>EDmarg</a></code>, using numerical integration conditional on the etimated variance components.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>nlme</span>)
-<span class='fu'>data</span>(<span class='no'>DNase</span>)
-<span class='no'>DNase</span>$<span class='no'>Run</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>DNase</span>$<span class='no'>Run</span>, <span class='kw'>levels</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>11</span>)
-
-<span class='fu'>ggplot</span>(<span class='no'>DNase</span>, <span class='fu'>aes</span>(<span class='kw'>y</span><span class='kw'>=</span><span class='no'>density</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>conc</span>, <span class='kw'>colour</span><span class='kw'>=</span><span class='no'>Run</span>)) + <span class='fu'>geom_point</span>() + <span class='fu'>coord_trans</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='st'>"log"</span>)</div><div class='img'><img src='medrm-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='co'>#############</span>
-<span class='co'># fit a 5-parameter log-logistic model</span>
-<span class='co'># with random asymptotes, steepness and inflection point location</span>
-
-<span class='co'>## starting values need to be provided:</span>
-<span class='co'># estimate a set of parameters for each Run</span>
-<span class='no'>mf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glsdrm.html'>glsdrm</a></span>(<span class='no'>density</span> ~ <span class='no'>conc</span>, <span class='kw'>curveid</span><span class='kw'>=</span><span class='no'>b</span> + <span class='no'>c</span> + <span class='no'>d</span> + <span class='no'>e</span> + <span class='no'>f</span> ~ <span class='no'>Run</span>,
-             <span class='kw'>fct</span><span class='kw'>=</span><span class='fu'>LL.5</span>(), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>DNase</span>)
-
-<span class='co'># curve specific difference to the parameter average</span>
-<span class='no'>cmat</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>coefficients</span>(<span class='no'>mf</span>), <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>5</span>)
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>apply</span>(<span class='no'>cmat</span>, <span class='fl'>2</span>, <span class='no'>mean</span>)                  <span class='co'># fixed effect starting values</span>
-<span class='fu'>names</span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>[<span class='fl'>2</span>:<span class='fl'>6</span>]
-<span class='no'>rmat</span> <span class='kw'>&lt;-</span> <span class='fu'>t</span>(<span class='fu'>apply</span>(<span class='no'>cmat</span>, <span class='fl'>1</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>-<span class='no'>m</span>)) <span class='co'># random effect starting values</span>
-<span class='fu'>rownames</span>(<span class='no'>rmat</span>) <span class='kw'>&lt;-</span> <span class='fu'>levels</span>(<span class='no'>DNase</span>$<span class='no'>Run</span>)
-<span class='fu'>colnames</span>(<span class='no'>rmat</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>[<span class='fl'>2</span>:<span class='fl'>6</span>]
-
-<span class='co'># mixed model fit</span>
-<span class='no'>mm</span> <span class='kw'>&lt;-</span> <span class='fu'>medrm</span>(<span class='no'>density</span> ~ <span class='no'>conc</span>, <span class='kw'>fct</span><span class='kw'>=</span><span class='fu'>LL.5</span>(), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>DNase</span>,
-            <span class='kw'>random</span><span class='kw'>=</span><span class='no'>b</span> + <span class='no'>c</span> + <span class='no'>d</span> + <span class='no'>e</span> ~ <span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>Run</span>,
-            <span class='kw'>start</span><span class='kw'>=</span><span class='fu'>list</span>(<span class='kw'>fixed</span><span class='kw'>=</span><span class='no'>m</span>[<span class='fu'>c</span>(<span class='st'>"b"</span>,<span class='st'>"c"</span>,<span class='st'>"d"</span>,<span class='st'>"e"</span>,<span class='st'>"f"</span>)], <span class='kw'>Run</span><span class='kw'>=</span><span class='no'>rmat</span>))
-
-<span class='co'># medrc methods:</span>
-<span class='fu'>plot</span>(<span class='no'>mm</span>, <span class='kw'>logx</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>ndose</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>ranef</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-
-<span class='fu'>print</span>(<span class='no'>mm</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/nlme/topics/VarCorr'>VarCorr</a></span>(<span class='no'>mm</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/nlme/topics/random.effects'>ranef</a></span>(<span class='no'>mm</span>)
-<span class='fu'>coef</span>(<span class='no'>mm</span>)
-<span class='fu'>vcov</span>(<span class='no'>mm</span>)
-
-<span class='co'>### effective dose estimation ED25, ED50, ED75</span>
-<span class='co'># based on the fixed effect estimates</span>
-<span class='co'># conditional on random effects of 0</span>
-<span class='fu'>ED</span>(<span class='no'>mm</span>, <span class='fu'>c</span>(<span class='fl'>25</span>, <span class='fl'>50</span>, <span class='fl'>75</span>), <span class='kw'>interval</span><span class='kw'>=</span><span class='st'>"tfls"</span>)
-
-<span class='co'># predictions for Run 2</span>
-<span class='no'>ndata</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>conc</span><span class='kw'>=</span><span class='fu'>exp</span>(<span class='fu'>seq</span>(<span class='fu'>log</span>(<span class='fl'>0.1</span>),<span class='fu'>log</span>(<span class='fl'>13</span>), <span class='kw'>length</span><span class='kw'>=</span><span class='fl'>10</span>)), <span class='kw'>Run</span><span class='kw'>=</span><span class='st'>"2"</span>)
-<span class='fu'>predict</span>(<span class='no'>mm</span>, <span class='kw'>newdata</span><span class='kw'>=</span><span class='no'>ndata</span>)
-
-<span class='co'>##############################</span>
-<span class='co'># fitting a reduced model</span>
-<span class='co'># without random slope ()</span>
-<span class='no'>mmr</span> <span class='kw'>&lt;-</span> <span class='fu'>medrm</span>(<span class='no'>density</span> ~ <span class='no'>conc</span>, <span class='kw'>fct</span><span class='kw'>=</span><span class='fu'>LL.5</span>(), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>DNase</span>,
-             <span class='kw'>random</span><span class='kw'>=</span><span class='no'>c</span> + <span class='no'>d</span> + <span class='no'>e</span> ~ <span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>Run</span>,
-             <span class='kw'>start</span><span class='kw'>=</span><span class='fu'>list</span>(<span class='kw'>fixed</span><span class='kw'>=</span><span class='no'>m</span>[<span class='fu'>c</span>(<span class='st'>"b"</span>,<span class='st'>"c"</span>,<span class='st'>"d"</span>,<span class='st'>"e"</span>,<span class='st'>"f"</span>)], <span class='kw'>Run</span><span class='kw'>=</span><span class='no'>rmat</span>))
-
-<span class='co'># estimating marginal ED25, ED50, ED75</span>
-<span class='co'># (by numerical integration conditional on estimated variance-components)</span>
-<span class='fu'><a href='EDmarg.html'>EDmarg</a></span>(<span class='no'>mmr</span>, <span class='fu'>c</span>(<span class='fl'>25</span>, <span class='fl'>50</span>, <span class='fl'>75</span>), <span class='kw'>interval</span><span class='kw'>=</span><span class='st'>"tfls"</span>)
-<span class='co'># comparing to Run-specific ED</span>
-<span class='fu'>ED</span>(<span class='no'>mmr</span>, <span class='fu'>c</span>(<span class='fl'>25</span>, <span class='fl'>50</span>, <span class='fl'>75</span>), <span class='kw'>interval</span><span class='kw'>=</span><span class='st'>"tfls"</span>)
-
-<span class='co'># marginal prediction</span>
-<span class='no'>ndata</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>conc</span><span class='kw'>=</span><span class='fu'>exp</span>(<span class='fu'>seq</span>(<span class='fu'>log</span>(<span class='fl'>0.1</span>),<span class='fu'>log</span>(<span class='fl'>13</span>), <span class='kw'>length</span><span class='kw'>=</span><span class='fl'>10</span>)))
-<span class='fu'>predict</span>(<span class='no'>mmr</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"marginal"</span>, <span class='kw'>newdata</span><span class='kw'>=</span><span class='no'>ndata</span>)
-
-
-<span class='co'>#############</span>
-<span class='co'>#############</span>
-<span class='co'># fit a 4-parameter Weibull model</span>
-<span class='co'># with random asymptotes and inflection point location</span>
-
-<span class='co'>## starting values:</span>
-<span class='no'>mf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glsdrm.html'>glsdrm</a></span>(<span class='no'>density</span> ~ <span class='no'>conc</span>, <span class='kw'>curveid</span><span class='kw'>=</span><span class='no'>b</span> + <span class='no'>c</span> + <span class='no'>d</span> + <span class='no'>e</span> ~ <span class='no'>Run</span>,
-             <span class='kw'>fct</span><span class='kw'>=</span><span class='fu'>W1.4</span>(), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>DNase</span>)
-<span class='no'>cmat</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>coefficients</span>(<span class='no'>mf</span>), <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>4</span>)
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>apply</span>(<span class='no'>cmat</span>, <span class='fl'>2</span>, <span class='no'>mean</span>)                  <span class='co'># fixed effect starting values</span>
-<span class='fu'>names</span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>[<span class='fl'>2</span>:<span class='fl'>5</span>]
-<span class='no'>rmat</span> <span class='kw'>&lt;-</span> <span class='fu'>t</span>(<span class='fu'>apply</span>(<span class='no'>cmat</span>, <span class='fl'>1</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>-<span class='no'>m</span>)) <span class='co'># random effect starting values</span>
-<span class='fu'>rownames</span>(<span class='no'>rmat</span>) <span class='kw'>&lt;-</span> <span class='fu'>levels</span>(<span class='no'>DNase</span>$<span class='no'>Run</span>)
-<span class='fu'>colnames</span>(<span class='no'>rmat</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>[<span class='fl'>2</span>:<span class='fl'>5</span>]
-
-<span class='co'># mixed model fit</span>
-<span class='no'>mmw</span> <span class='kw'>&lt;-</span> <span class='fu'>medrm</span>(<span class='no'>density</span> ~ <span class='no'>conc</span>, <span class='kw'>fct</span><span class='kw'>=</span><span class='fu'>W1.4</span>(), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>DNase</span>,
-            <span class='kw'>random</span><span class='kw'>=</span><span class='no'>c</span> + <span class='no'>d</span> + <span class='no'>e</span> ~ <span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>Run</span>,
-            <span class='kw'>start</span><span class='kw'>=</span><span class='fu'>list</span>(<span class='kw'>fixed</span><span class='kw'>=</span><span class='no'>m</span>[<span class='fu'>c</span>(<span class='st'>"b"</span>,<span class='st'>"c"</span>,<span class='st'>"d"</span>,<span class='st'>"e"</span>)], <span class='kw'>Run</span><span class='kw'>=</span><span class='no'>rmat</span>))
-
-<span class='fu'>plot</span>(<span class='no'>mmw</span>, <span class='kw'>logx</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>ndose</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>ranef</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-
-<span class='co'># AIC comparison of LL.5 and W1.4 model</span>
-<span class='fu'>AIC</span>(<span class='no'>mm</span>, <span class='no'>mmw</span>)
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -246,15 +155,11 @@ effects dose-response modeling.</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
-
       <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
 
-    <h2>Author</h2>
-    Daniel Gerhard
+      <li><a href="#see-also">See also</a></li>
+          </ul>
+
   </div>
 </div>
 

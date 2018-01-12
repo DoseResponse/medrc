@@ -1,3 +1,16 @@
+#' Plot medrc objects
+#' 
+#' Plot predicted dose-response curves for medrc objects
+#' 
+#' @param x An object of class medrc
+#' @param ndose Number of points to interpolate the dose response curve
+#' @param ranef If FALSE the predictions are based only on fixed effects, if TRUE the random effects are presented as additional lines around the fixed effects curve. Only implemented for curveid=NULL.
+#' @param level Hierarchical level of random effects, which are presented when ranef=TRUE.
+#' @param logx If TRUE, plot x-axis on a logarithmic scale
+#' @param ... further arguments
+#' 
+#' @keywords methods
+
 plot.medrc <- function(x, ..., ndose=25, ranef=FALSE, level=NULL, logx=FALSE){
   fct <- x$fct
   

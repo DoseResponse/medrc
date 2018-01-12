@@ -1,3 +1,14 @@
+#' Plot gdrc objects
+#' 
+#' Plot predicted dose-response curves for glsdrc objects
+#' 
+#' @param x An object of class glsdrc
+#' @param ndose Number of points to interpolate the dose response curve
+#' @param logx If TRUE, plot x-axis on a logarithmic scale
+#' @param ... further arguments
+#' 
+#' @keywords methods
+
 plot.glsdrc <- function(x, ..., ndose=25, logx=FALSE){
   fct <- x$fct
   

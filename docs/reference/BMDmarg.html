@@ -85,13 +85,10 @@
     <p>Estimates the marginal benchmark dose, conditional on the estimated variance components.</p>
     
 
-    <pre class="usage"><span class='fu'>BMDmarg</span>(<span class='no'>object</span>, <span class='no'>respLev</span>,
-        <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>, <span class='st'>"delta"</span>, <span class='st'>"fls"</span>, <span class='st'>"tfls"</span>),
-        <span class='kw'>clevel</span><span class='kw'>=</span><span class='kw'>NULL</span>,
-        <span class='kw'>level</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(!(<span class='no'>interval</span> <span class='kw'>==</span> <span class='st'>"none"</span>), <span class='fl'>0.95</span>, <span class='kw'>NULL</span>),
-        <span class='kw'>bmd</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"additional"</span>, <span class='st'>"extra"</span>),
-        <span class='kw'>background</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>nGQ</span><span class='kw'>=</span><span class='fl'>5</span>, <span class='kw'>rfinterval</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1000</span>),
-        <span class='kw'>display</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>BMDmarg</span>(<span class='no'>object</span>, <span class='no'>respLev</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>, <span class='st'>"delta"</span>, <span class='st'>"fls"</span>, <span class='st'>"tfls"</span>),
+  <span class='kw'>clevel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(!(<span class='no'>interval</span> <span class='kw'>==</span> <span class='st'>"none"</span>), <span class='fl'>0.95</span>, <span class='kw'>NULL</span>),
+  <span class='kw'>bmd</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"additional"</span>, <span class='st'>"extra"</span>), <span class='kw'>background</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>nGQ</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>rfinterval</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1000</span>), <span class='kw'>display</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -106,8 +103,7 @@
     </tr>
     <tr>
       <th>interval</th>
-      <td><p>character string specifying the type of confidence
-    intervals to be supplied.</p></td>
+      <td><p>character string specifying the type of confidence intervals to be supplied.</p></td>
     </tr>
     <tr>
       <th>clevel</th>
@@ -119,8 +115,7 @@
     </tr>
     <tr>
       <th>bmd</th>
-      <td><p>benchmark dose estimation (smallest dose resulting in a
-    probability of an abnormal response)</p></td>
+      <td><p>benchmark dose estimation (smallest dose resulting in a probability of an abnormal response)</p></td>
     </tr>
     <tr>
       <th>background</th>
@@ -132,15 +127,15 @@
     </tr>
     <tr>
       <th>rfinterval</th>
-      <td><p>numeric vector. Interval for root finding (uniroot) to search for ED values. Default is [0, 1000].</p></td>
+      <td><p>numeric vector. Interval for root finding (uniroot) to search for ED values.</p></td>
     </tr>
     <tr>
       <th>display</th>
-      <td><p>logical. If TRUE results are displayed; otherwise they are not</p></td>
+      <td><p>logical. If TRUE results are displayed; otherwise they are not.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments</p></td>
+      <td><p>additional arguments.</p></td>
     </tr>
     </table>
     
@@ -152,8 +147,6 @@
       <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
-    <h2>Author</h2>
-    Christian Ritz, Daniel Gerhard
   </div>
 </div>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The log-logistic function — meLL • medrc</title>
+<title>The log-logistic function — meLL.2 • medrc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -85,13 +85,13 @@
     <p>'meLL.X' provides the X-parameter log-logistic function.</p>
     
 
-    <pre class="usage"><span class='fu'>meLL.5</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>, <span class='no'>f</span>)
+    <pre class="usage"><span class='fu'>meLL.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meLL.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meLL.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meLL.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meLL.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meLL.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)</pre>
+<span class='fu'>meLL.5</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>, <span class='no'>f</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -105,16 +105,16 @@
       <td><p>steepness</p></td>
     </tr>
     <tr>
-      <th>c</th>
-      <td><p>lower limit</p></td>
+      <th>e</th>
+      <td><p>ED50</p></td>
     </tr>
     <tr>
       <th>d</th>
       <td><p>upper limit</p></td>
     </tr>
     <tr>
-      <th>e</th>
-      <td><p>ED50</p></td>
+      <th>c</th>
+      <td><p>lower limit</p></td>
     </tr>
     <tr>
       <th>f</th>
@@ -124,16 +124,15 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The five-parameter logistic function is given by the expression
-  $$ f(x) = c + \frac{d-c}{(1+\exp(b(\log(x)-\log(e))))^f}$$</p>  
-<p>or in another parameterisation
-  $$ f(x) = c + \frac{d-c}{(1+\exp(b(\log(x)-e)))^f}$$</p>  
-<p>The function is asymmetric for \(f\) different from 1.</p>
+    <p>The five-parameter logistic function is given by the expression 
+$$ f(x) = c + \frac{d-c}{(1+\exp(b(\log(x)-\log(e))))^f}$$ 
+or in another parameterisation 
+$$ f(x) = c + \frac{d-c}{(1+\exp(b(\log(x)-e)))^f}$$ 
+The function is asymmetric for \(f\) different from 1.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Finney, D. J. (1979) Bioassay and the Practise of Statistical Inference, 
-  <em>Int. Statist. Rev.</em>, <b>47</b>, 1--12.</p>
+    <p>Finney, D. J. (1979) Bioassay and the Practise of Statistical Inference, <em>Int. Statist. Rev.</em>, <b>47</b>, 1--12.</p>
     
 
   </div>
@@ -147,8 +146,6 @@
       <li><a href="#references">References</a></li>
           </ul>
 
-    <h2>Author</h2>
-    Daniel Gerhard
   </div>
 </div>
 

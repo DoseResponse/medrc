@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Asymptotic regression model — meAR • medrc</title>
+<title>Asymptotic regression model — meAR.2 • medrc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -87,18 +87,14 @@
 
     <pre class="usage"><span class='fu'>meAR.2</span>(<span class='no'>x</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meAR.3</span>(<span class='no'>x</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)</pre>
+<span class='fu'>meAR.3</span>(<span class='no'>x</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>numeric vector specifying the dose.</p></td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td><p>lower limit at at \(x=0\)</p></td>
+      <td><p>numeric vector specifying the dose</p></td>
     </tr>
     <tr>
       <th>d</th>
@@ -108,19 +104,17 @@
       <th>e</th>
       <td><p>\(e&gt;0\) is determining the steepness of the increase as \(x\)</p></td>
     </tr>
+    <tr>
+      <th>c</th>
+      <td><p>lower limit at at \(x=0\)</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The asymptotic regression model is a three-parameter model with mean function:</p>  
-<p>$$ f(x) = c + (d-c)(1-\exp(-x/e))$$</p>  
-<p>The parameter \(c\) is the lower limit (at \(x=0\)), the parameter \(d\) is the upper limit 
-  and the parameter \(e&gt;0\) is determining the steepness of the increase as \(x\).</p>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A list of class <code>drcMean</code>, containing the mean function, the self starter function,
-  the parameter names and other components such as derivatives and a function for calculating ED values.</p>
+    <p>The asymptotic regression model is a three-parameter model with mean function:
+$$ f(x) = c + (d-c)(1-\exp(-x/e))$$
+The parameter \(c\) is the lower limit (at \(x=0\)), the parameter \(d\) is the upper limit and the parameter \(e&gt;0\) is determining the steepness of the increase as \(x\).</p>
     
 
   </div>
@@ -130,12 +124,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#value">Value</a></li>
           </ul>
 
-    <h2>Author</h2>
-    Daniel Gerhard
   </div>
 </div>
 

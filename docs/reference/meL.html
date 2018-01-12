@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The logistic model — meL • medrc</title>
+<title>The logistic model — meL.2 • medrc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -85,13 +85,13 @@
     <p>The general asymmetric five-parameter logistic model for describing dose-response relationships.</p>
     
 
-    <pre class="usage"><span class='fu'>meL.5</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>, <span class='no'>f</span>)
+    <pre class="usage"><span class='fu'>meL.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meL.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meL.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meL.3</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>d</span>, <span class='no'>e</span>)
+<span class='fu'>meL.4</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>)
 
-  <span class='fu'>meL.2</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>e</span>)</pre>
+<span class='fu'>meL.5</span>(<span class='no'>x</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>, <span class='no'>e</span>, <span class='no'>f</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -105,16 +105,16 @@
       <td><p>steepness</p></td>
     </tr>
     <tr>
-      <th>c</th>
-      <td><p>lower limit</p></td>
+      <th>e</th>
+      <td><p>ED50</p></td>
     </tr>
     <tr>
       <th>d</th>
       <td><p>upper limit</p></td>
     </tr>
     <tr>
-      <th>e</th>
-      <td><p>ED50</p></td>
+      <th>c</th>
+      <td><p>lower limit</p></td>
     </tr>
     <tr>
       <th>f</th>
@@ -124,9 +124,7 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The default arguments yields the five-parameter logistic mean function given by the expression</p>  
-<p>$$ f(x) = c + \frac{d-c}{(1+\exp(b(x - e)))^f}$$</p> 
-<p>The model is sometimes referred to as the Boltzmann model.</p>
+    <p>The default arguments yields the five-parameter logistic mean function given by the expression $$ f(x) = c + \frac{d-c}{(1+\exp(b(x - e)))^f}$$ The model is sometimes referred to as the Boltzmann model.</p>
     
 
   </div>
@@ -138,8 +136,6 @@
       <li><a href="#details">Details</a></li>
           </ul>
 
-    <h2>Author</h2>
-    Daniel Gerhard
   </div>
 </div>
 

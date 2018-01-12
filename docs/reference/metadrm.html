@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fitting hierarchical dose-response models via meta-analysis — metadrm • medrc</title>
+<title>2-stage estimation in hierarchical dose-response models via meta-analysis — metadrm • medrc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -78,32 +78,26 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fitting hierarchical dose-response models via meta-analysis</h1>
+    <h1>2-stage estimation in hierarchical dose-response models via meta-analysis</h1>
     </div>
 
     
     <p>A two-stage meta-analysis approach to fit hierarchical dose-response models.</p>
     
 
-    <pre class="usage"><span class='fu'>metadrm</span>(<span class='no'>formula</span>, <span class='no'>fct</span>, <span class='no'>ind</span>, <span class='no'>data</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"continuous"</span>,
-  <span class='kw'>cid2</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>pms2</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>struct</span><span class='kw'>=</span><span class='st'>"UN"</span>, <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"REML"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>metadrm</span>(<span class='no'>formula</span>, <span class='no'>fct</span>, <span class='no'>ind</span>, <span class='no'>data</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"continuous"</span>, <span class='kw'>cid2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>pms2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>struct</span> <span class='kw'>=</span> <span class='st'>"UN"</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"REML"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>formula</th>
-      <td><p>a symbolic description of the model to be fit. Either of the form 'response \(~\) dose' 
-  or as a data frame with response values in first column and dose values in second column.</p></td>
+      <td><p>a symbolic description of the model to be fit. Either of the form 'response \(~\) dose' or as a data frame with response values in first column and dose values in second column.</p></td>
     </tr>
     <tr>
       <th>fct</th>
-      <td><p>a list with three or more elements specifying the non-linear
-  function, the accompanying self starter function, the names of the parameter in the non-linear function and, 
-  optionally, the first and second derivatives as well as information used for calculation of ED values.
-  Currently available functions include, among others, the four- and five-parameter log-logistic models 
-  <code>LL.4</code>, <code>LL.5</code> and the Weibull model <code>W1.4</code>. Use
-  <code>getMeanFunctions</code> for a full list.</p></td>
+      <td><p>a list with three or more elements specifying the non-linear function, the accompanying self starter function, the names of the parameter in the non-linear function and, optionally, the first and second derivatives as well as information used for calculation of ED values. Currently available functions include, among others, the four- and five-parameter log-logistic models <code>LL.4</code>, <code>LL.5</code> and the Weibull model <code>W1.4</code>. Use <code>getMeanFunctions</code> for a full list.</p></td>
     </tr>
     <tr>
       <th>ind</th>
@@ -116,8 +110,7 @@
     <tr>
       <th>type</th>
       <td><p>a character string specifying the distribution of the data (parameter estimation will depend on the assumed distribution as different log likelihood functions will be used). 
-  The default is "continuous", corresponding to assuming a normal distribution. The choices "binary" and "event" imply a binomial and multinomial distribution, respectively. The choice "ssd" is for fitting a species sensitivity
-  distribution.</p></td>
+The default is "continuous", corresponding to assuming a normal distribution. The choices "binary" and "event" imply a binomial and multinomial distribution, respectively. The choice "ssd" is for fitting a species sensitivity distribution.</p></td>
     </tr>
     <tr>
       <th>cid2</th>
@@ -141,13 +134,13 @@
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function estimates population parameters from individual drm fits, using the metafor package.</p>
-    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class 'metadrc'.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function estimates population parameters from individual drm fits, using the metafor package.</p>
     
 
   </div>
@@ -156,13 +149,11 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
-    <h2>Author</h2>
-    Daniel Gerhard
   </div>
 </div>
 

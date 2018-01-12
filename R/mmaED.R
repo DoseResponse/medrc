@@ -1,3 +1,19 @@
+#' ED estimation for averaged medrc and glsdrc models
+#' 
+#' Estimates ED for averaged fixed effects of several medrc or glsdrc objects.
+#' 
+#' @param object an medrc object
+#' @param ... further medrc objects
+#' @param respLev a numeric vector containing the response levels
+#' @param ic the information criterion used for model averaging
+#' @param interval character string specifying the type of confidence intervals to be supplied.
+#' @param level confidence level, default at 0.95
+#' @param marginal logical. If TRUE, marginalized ED estimates are obtained. See EDmarg for further information.
+#' @param nGQ integer. Specifies the number nof nodes for Gauss-Hermite quadrature.
+#' @param rfinterval numeric vector. Interval for root finding (uniroot) to search for ED values.
+#' 
+#' @keywords htest
+
 mmaED <- function(object, ..., respLev, ic = c("AIC", "BIC"), interval = c("none", "buckland", "kang"), level = 0.95, marginal=FALSE, nGQ=5, rfinterval=c(0, 1000)){
   interval <- match.arg(interval)
   ic <- match.arg(ic)

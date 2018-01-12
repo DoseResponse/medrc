@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dose-response curve estimation by generalized least squares — glsdrm • medrc</title>
+<title>Plot gdrc objects — plot.glsdrc • medrc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -78,64 +78,36 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Dose-response curve estimation by generalized least squares</h1>
+    <h1>Plot gdrc objects</h1>
     </div>
 
     
-    <p>Implements drc nonlinear functions into the nlme framework for nonlinear GLS dose-response modeling.</p>
+    <p>Plot predicted dose-response curves for glsdrc objects</p>
     
 
-    <pre class="usage"><span class='fu'>glsdrm</span>(<span class='no'>form</span>, <span class='kw'>curveid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>data</span>, <span class='no'>fct</span>, <span class='kw'>correlation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>control</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for glsdrc</span>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>ndose</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>logx</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>form</th>
-      <td><p>Formula describing the dose-response relationship</p></td>
+      <th>x</th>
+      <td><p>An object of class glsdrc</p></td>
     </tr>
     <tr>
-      <th>curveid</th>
-      <td><p>Formula with parameter names on the left hand side (divided by +) and a column name in data, denoting a factor, to estimate separate parameters per factor-level. If NULL only fixed effects for a single curve will be estimated.</p></td>
+      <th>...</th>
+      <td><p>further arguments</p></td>
     </tr>
     <tr>
-      <th>data</th>
-      <td><p>a data.frame object</p></td>
+      <th>ndose</th>
+      <td><p>Number of points to interpolate the dose response curve</p></td>
     </tr>
     <tr>
-      <th>fct</th>
-      <td><p>a function of the drc package</p></td>
-    </tr>
-    <tr>
-      <th>correlation</th>
-      <td><p>additional corClasses object</p></td>
-    </tr>
-    <tr>
-      <th>weights</th>
-      <td><p>additional varClasses object</p></td>
-    </tr>
-    <tr>
-      <th>control</th>
-      <td><p>list with nlme control arguments</p></td>
-    </tr>
-    <tr>
-      <th>start</th>
-      <td><p>optional list with initial values for the fixed components. If NULL the initial values will be found automatically</p></td>
+      <th>logx</th>
+      <td><p>If TRUE, plot x-axis on a logarithmic scale</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An object of class glsdrc</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>An application of glsdrm is shown on the help pages of data <code>broccoli</code>. EDx and selectivity indices can be calculated with functions <code><a href='http://www.rdocumentation.org/packages/drc/topics/ED.drc'>ED</a></code> and <code><a href='http://www.rdocumentation.org/packages/drc/topics/EDcomp'>EDcomp</a></code>. Model-averaged ED can be computed by function <code><a href='mmaED.html'>mmaED</a></code>.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p><code><a href='http://www.rdocumentation.org/packages/drc/topics/drm'>drm</a></code>, <code><a href='http://www.rdocumentation.org/packages/nlme/topics/gls'>gls</a></code></p>
     
 
   </div>
@@ -143,13 +115,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>
