@@ -9,8 +9,8 @@ r:
 - devel
 
 r_github_packages:
-  - DoseResponse/drc
   - DoseResponse/drcData
+  - DoseResponse/drc
   - r-lib/covr
 
 after_success:
