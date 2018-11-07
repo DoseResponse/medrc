@@ -16,8 +16,8 @@ Installation
 ## You can install medrc from GitHub
 # install.packages("devtools")
 ## first installing drc and drcData
-devtools::install_github("DoseResponse/drc")
 devtools::install_github("DoseResponse/drcData")
+devtools::install_github("DoseResponse/drc")
 ## then installing the development version of medrc
 devtools::install_github("DoseResponse/medrc")
 ```
