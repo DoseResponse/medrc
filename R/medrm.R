@@ -99,7 +99,7 @@ function(form, curveid=NULL, data, fct, random, correlation=NULL, weights=NULL, 
                  EXD.2 = c(3, 4))
   
   pest <- mepnames[is.na(ffixed[ppos])]
-  pfixed <- paste(mepnames[!is.na(ffixed[ppos])], "=", ffixed[!is.na(ffixed[ppos])], sep="")
+  pfixed <- paste(mepnames[!is.na(ffixed[ppos])], "=", ffixed[ppos][!is.na(ffixed[ppos])], sep="")
   
   # one-sided curveid formula
   if (!is.null(curveid) & length(curveid) < 3){
